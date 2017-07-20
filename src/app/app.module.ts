@@ -28,6 +28,7 @@ import { User } from '../providers/user';
 
 import { Camera } from '@ionic-native/camera';
 import { GoogleMaps } from '@ionic-native/google-maps';
+import { GooglePlus } from '@ionic-native/google-plus';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
@@ -110,6 +111,7 @@ export function provideSettings(storage: Storage) {
     User,
     Camera,
     GoogleMaps,
+    GooglePlus,
     SplashScreen,
     StatusBar,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },

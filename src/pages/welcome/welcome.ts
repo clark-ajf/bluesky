@@ -4,6 +4,8 @@ import { NavController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { SignupPage } from '../signup/signup';
 
+import { GooglePlus } from '@ionic-native/google-plus';
+
 /**
  * The Welcome Page is a splash page that quickly describes the app,
  * and then directs the user to create an account or log in.
@@ -16,10 +18,17 @@ import { SignupPage } from '../signup/signup';
 })
 export class WelcomePage {
 
-  constructor(public navCtrl: NavController) { }
+  constructor(public navCtrl: NavController, public googlePlus: GooglePlus) { }
 
   login() {
     this.navCtrl.push(LoginPage);
+    /*this.googlePlus.login({
+          'webClientId': '642810877670-e6ucbbgl8u53tie8mmac9iv73v02v4ma.apps.googleusercontent.com'
+        }).then((res) => {
+            console.log(res);
+        }, (err) => {
+            console.log(err);
+        });*/
   }
 
   signup() {
