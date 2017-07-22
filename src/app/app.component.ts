@@ -17,6 +17,7 @@ import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { WelcomePage } from '../pages/welcome/welcome';
+import { QRPage } from '../pages/qr/qr';
 
 import { Settings } from '../providers/providers';
 
@@ -49,6 +50,7 @@ export class MyApp {
   pages: any[] = [
     { title: 'Tutorial', component: TutorialPage },
     { title: 'Welcome', component: WelcomePage },
+    { title: 'QR', component: QRPage },
     { title: 'Tabs', component: TabsPage },
     { title: 'Cards', component: CardsPage },
     { title: 'Content', component: ContentPage },

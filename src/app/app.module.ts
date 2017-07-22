@@ -20,6 +20,7 @@ import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { WelcomePage } from '../pages/welcome/welcome';
+import { QRPage } from '../pages/qr/qr';
 
 import { Api } from '../providers/api';
 import { Items } from '../mocks/providers/items';
@@ -31,6 +32,8 @@ import { GoogleMaps } from '@ionic-native/google-maps';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -72,7 +75,8 @@ export function provideSettings(storage: Storage) {
     SignupPage,
     TabsPage,
     TutorialPage,
-    WelcomePage
+    WelcomePage,
+    QRPage
   ],
   imports: [
     BrowserModule,
@@ -103,7 +107,8 @@ export function provideSettings(storage: Storage) {
     SignupPage,
     TabsPage,
     TutorialPage,
-    WelcomePage
+    WelcomePage,
+    QRPage
   ],
   providers: [
     Api,
@@ -114,6 +119,7 @@ export function provideSettings(storage: Storage) {
     GooglePlus,
     SplashScreen,
     StatusBar,
+    BarcodeScanner,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }
