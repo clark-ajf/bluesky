@@ -48,16 +48,16 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   pages: any[] = [
-    { title: 'Tutorial', component: TutorialPage },
+    //{ title: 'Tutorial', component: TutorialPage },
     { title: 'Welcome', component: WelcomePage },
     { title: 'QR', component: QRPage },
-    { title: 'Tabs', component: TabsPage },
+    //{ title: 'Tabs', component: TabsPage },
     { title: 'Cards', component: CardsPage },
     { title: 'Content', component: ContentPage },
     { title: 'Login', component: LoginPage },
     { title: 'Signup', component: SignupPage },
-    { title: 'Map', component: MapPage },
-    { title: 'Master Detail', component: ListMasterPage },
+    //{ title: 'Map', component: MapPage },
+    { title: 'Hunts', component: ListMasterPage },
     { title: 'Menu', component: MenuPage },
     { title: 'Settings', component: SettingsPage },
     { title: 'Search', component: SearchPage }
