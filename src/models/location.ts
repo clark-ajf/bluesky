@@ -6,7 +6,8 @@ export class Location {
         public name: string, 
         public description: string,
         public hints: Hint[],
-        public imageUrl: string
+        public imageUrl: string,
+        public status?: string
         ){}
 
 }

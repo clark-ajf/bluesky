@@ -13,9 +13,9 @@
     </ion-list-header>
 
     <ion-item *ngFor="let location of locations" (click)="more(location)">
-      <ion-icon name="paper-plane" item-start color="primary"></ion-icon>
+      <ion-icon name="paper-plane" item-start color="{{location.status == 'found' ? 'secondary' : 'primary' }}"></ion-icon>
       <ion-label>{{location.name}}</ion-label>
-      <ion-badge item-end color="primary">Not Found</ion-badge>
+      <ion-badge item-end color="{{location.status == 'found' ? 'secondary' : 'primary' }}">{{location.status == 'found' ? 'Found' : 'Not Found' }}</ion-badge>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -97,6 +97,7 @@ export class MyApp {
     if (page.logsOut === true) {
       this.events.publish('user:logout');
       this.sessionData.logout();
+      this.googlePlus.logout();
       this.user = null;
       this.nav.setRoot(WelcomePage);
     }

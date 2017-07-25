@@ -19,6 +19,7 @@
         </ion-card-content>
     </ion-card>
     <div text-center>
-        <button ion-button (click)="scan()">Check-In</button>
+        <button *ngIf="location.status == 'not_found'" ion-button (click)="scan()">Check-In</button>
+        <button *ngIf="location.status == 'found'" ion-button color="secondary">Location Found</button>
     </div>
 </ion-content>

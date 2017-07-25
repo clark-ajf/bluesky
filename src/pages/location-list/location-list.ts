@@ -21,6 +21,7 @@ export class LocationListPage {
         imageUrl: 'assets/img/locations/SV_campus.jpg',
         name: 'Location 1',
         description: 'Main building on Campus, with a sign hard to forget!',
+        status: 'not_found',
         hints: [
             {message: 'Lorem Ipsum'}
         ]
@@ -30,6 +31,7 @@ export class LocationListPage {
         imageUrl: 'assets/img/locations/cmu_sv_fence.jpg',
         name: 'Location 2',
         description: 'By today the colors should be different, it changes every year!',
+        status: 'found',
         hints: [
             {message: 'Lorem Ipsum'}
         ]
