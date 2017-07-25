@@ -35,7 +35,7 @@ export class WelcomePage {
   }
 
   testLogin(){
-    this.sessionData.login({displayName: 'Test User', email: 'test@cmu.edu', familyName: 'User', givenName: 'Test', idToken: '0', imageUrl: '', userId: 0});
+    this.sessionData.login({displayName: 'Test User', email: 'test@cmu.edu', familyName: 'User', givenName: 'Test', idToken: '0', imageUrl: 'http://www.gravatar.com/avatar?d=mm&s=140', userId: 0});
     this.navCtrl.setRoot(TabsPage);
   }
 }
