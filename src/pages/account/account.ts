@@ -20,6 +20,11 @@ export class AccountPage {
   user: User;
 
   constructor(private app: App, public nav: NavController, public navParams: NavParams, private sessionData: SessionData, private googlePlus: GooglePlus) {
+    this.sessionData.hasLoggedIn().then((hasLoggedIn: boolean) => {
+      if (hasLoggedIn !== true) {
+        this.logout();
+      }
+    });
   } 
 
   ionViewDidLoad() {
@@ -27,11 +32,11 @@ export class AccountPage {
   }  
 
   ngAfterViewInit() {
-    this.getUser();
+    this.getUserData();
   }
 
-  getUser() {
-     return this.sessionData.getUser().then((user) => {
+  getUserData() {
+     return this.sessionData.getUser().then((user: User) => {
       this.user = user;
       return;
     });

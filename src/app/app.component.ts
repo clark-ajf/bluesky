@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Platform, Nav, Config, Events, MenuController } from 'ionic-angular';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -18,14 +18,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { GooglePlus } from '@ionic-native/google-plus';
 
 import { User } from '../models/user';
-
-export interface MenuItem {
-  title: string;
-  component: any;
-  icon: string;
-  logsOut?: boolean;
-  index?: number;
-}
+import { MenuItem } from '../models/menuItem';
 
 @Component({
   templateUrl: 'app.template.html'
@@ -42,7 +35,7 @@ export class MyApp {
   ]
 
   loggedInPages: MenuItem[] = [
-    { title: 'My Hunts', component: MyHuntsPage, icon: 'locate' },
+    { title: 'My Hunts', component: MyHuntsPage, icon: 'locate', notifications: 3 },
     { title: 'Search', component: SearchPage, icon: 'search' },
     { title: 'Account', component: AccountPage, icon: 'person' },
     { title: 'Logout', component: WelcomePage, icon: 'log-out', logsOut: true }
@@ -52,18 +45,18 @@ export class MyApp {
     { title: 'Signup', component: WelcomePage, icon: 'log-in' }
   ];
 
-  constructor(private translate: TranslateService, private platform: Platform, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen, private events: Events, private menu: MenuController, private sessionData: SessionData, private googlePlus: GooglePlus) {
+  constructor(private change: ChangeDetectorRef, private translate: TranslateService, private platform: Platform, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen, private events: Events, private menu: MenuController, private sessionData: SessionData, private googlePlus: GooglePlus) {
     this.initTranslate();
 
-    this.listenToLoginEvents();
-
     this.sessionData.hasLoggedIn().then((hasLoggedIn) => {
-      this.enableMenu(hasLoggedIn === true)
+      this.enableLoggedInMenu(hasLoggedIn === true)
       if(hasLoggedIn === true){    
+        this.getUserData();
         this.nav.setRoot(TabsPage);
-        this.getUser();
       }
     });
+
+    this.listenToLoginEvents();
   }
 
   ionViewDidLoad() {
@@ -101,50 +94,39 @@ export class MyApp {
     }
 
     if (page.logsOut === true) {
-      // Give the menu time to close before changing to logged out
-      this.logout();
+      this.events.publish('user:logout');
+      this.sessionData.logout();
+      this.user = null;
+      this.nav.setRoot(WelcomePage);
     }
   }
 
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
-      this.enableMenu(true);
-      this.getUser();
+      this.getUserData();
+      this.enableLoggedInMenu(true);
     });
 
     this.events.subscribe('user:signup', () => {
-      this.enableMenu(true);
-      this.getUser();
+      this.getUserData();
+      this.enableLoggedInMenu(true);
     });
 
     this.events.subscribe('user:logout', () => {
-      this.enableMenu(false);
+      this.enableLoggedInMenu(false);
     });
   }
 
-  enableMenu(loggedIn) {
+  enableLoggedInMenu(loggedIn) {
     this.menu.enable(loggedIn, 'loggedInMenu');
     this.menu.enable(!loggedIn, 'loggedOutMenu');
   }
 
-  getUser() {
-     return this.sessionData.getUser().then((user) => {
+  getUserData() {
+     return this.sessionData.getUser().then((user: User) => {
       this.user = user;
+      this.change.detectChanges();
       return;
     });
-  }
-
-  logout() {
-    this.user = null;
-    this.sessionData.logout();
-    this.googlePlus.logout();
-    this.nav.setRoot(WelcomePage);
-  }
-
-  changeUser(){    
-    this.user = null;
-    this.sessionData.logout();
-    this.googlePlus.disconnect();
-    this.nav.setRoot(WelcomePage);
   }
 }

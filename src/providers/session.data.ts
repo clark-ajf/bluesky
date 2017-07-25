@@ -9,7 +9,7 @@ import { User } from '../models/user';
 export class SessionData {
   HAS_LOGGED_IN = 'hasLoggedIn';
 
-  constructor(public events: Events, public storage: Storage) {}
+  constructor(public events: Events, public storage: Storage) { }
 
   login(user: User) {
     this.storage.set(this.HAS_LOGGED_IN, true);
@@ -23,7 +23,7 @@ export class SessionData {
     this.events.publish('user:logout');
   }
 
-  removeUser(){
+  removeUser() {
     this.storage.remove('user');
   }
 
@@ -32,20 +32,20 @@ export class SessionData {
   }
 
   getUser() {
-    return this.storage.get('user').then((value: User) => {
-      return value;
+    return new Promise(resolve => {
+      this.storage.get('user').then((value: User) => resolve(value));
     });
   }
 
-  setUsername(userObj:User, displayName: string){
-  // call DB to update too
+  setUsername(userObj: User, displayName: string) {
+    // call DB to update too
     userObj.displayName = displayName;
-    this.storage.set('user',userObj);
+    this.storage.set('user', userObj);
   }
 
   hasLoggedIn() {
-    return this.storage.get(this.HAS_LOGGED_IN).then((value) => {
-      return value === true;
+    return new Promise(resolve => {
+      this.storage.get(this.HAS_LOGGED_IN).then((value: boolean) => resolve(value));
     });
   }
 }

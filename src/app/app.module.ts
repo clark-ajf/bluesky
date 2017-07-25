@@ -7,6 +7,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 
 import { MyHuntsPage } from '../pages/my-hunts/my-hunts';
+import { HuntDetailsPage } from '../pages/hunt-details/hunt-details';
 import { AccountPage } from '../pages/account/account';
 import { SearchPage } from '../pages/search/search';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -36,6 +37,7 @@ export function HttpLoaderFactory(http: Http) {
   declarations: [
     MyApp,
     MyHuntsPage,
+    HuntDetailsPage,
     AccountPage,
     SearchPage,
     TabsPage,
@@ -60,6 +62,7 @@ export function HttpLoaderFactory(http: Http) {
   entryComponents: [
     MyApp,
     MyHuntsPage,
+    HuntDetailsPage,
     AccountPage,
     SearchPage,
     TabsPage,

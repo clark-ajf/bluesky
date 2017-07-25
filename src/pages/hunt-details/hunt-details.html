@@ -1,0 +1,24 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'Hunt' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <img [src]="hunt.img"/>
+        <ion-card-content>
+            <ion-card-title>
+            {{hunt.name}}
+            </ion-card-title>
+            <p>
+            {{hunt.message}}
+            </p>
+        </ion-card-content>
+    </ion-card>
+    <div text-center>
+        <button ion-button round large (click)="start()">{{ 'Start' | translate }}</button>
+    </div>
+</ion-content>

@@ -16,4 +16,40 @@
 </ion-header>
 
 <ion-content>
+   <ion-list>
+    <ion-list-header>
+      Active Hunts
+    </ion-list-header>
+
+    <ion-item-sliding *ngFor="let hunt of hunts" #item>
+      <ion-item (click)="more(hunt)">
+        <ion-avatar item-start>
+          <img [src]="hunt.img">
+        </ion-avatar>
+        <h2>{{hunt.name}}</h2>
+        <p>{{hunt.message}}</p>
+        <ion-note item-end>
+          {{hunt.time}}
+        </ion-note>
+      </ion-item>
+
+      <ion-item-options>
+        <button ion-button color="secondary" (click)="more(hunt)">
+          <ion-icon name="menu"></ion-icon>
+          More
+        </button>
+        <button ion-button color="dark" (click)="mute(hunt)">
+          <ion-icon name="volume-off"></ion-icon>
+          Mute
+        </button>
+      </ion-item-options>
+
+      <ion-item-options side="left" (ionSwipe)="archive(hunt)">
+        <button ion-button color="primary" expandable (click)="archive(hunt)">
+          <ion-icon name="trash" class="expand-hide"></ion-icon>
+          Drop
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
