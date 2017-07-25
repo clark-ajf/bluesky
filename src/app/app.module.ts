@@ -8,6 +8,8 @@ import { MyApp } from './app.component';
 
 import { MyHuntsPage } from '../pages/my-hunts/my-hunts';
 import { HuntDetailsPage } from '../pages/hunt-details/hunt-details';
+import { LocationDetailsPage } from '../pages/location-details/location-details';
+import { LocationListPage } from '../pages/location-list/location-list';
 import { AccountPage } from '../pages/account/account';
 import { SearchPage } from '../pages/search/search';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -38,6 +40,8 @@ export function HttpLoaderFactory(http: Http) {
     MyApp,
     MyHuntsPage,
     HuntDetailsPage,
+    LocationDetailsPage,
+    LocationListPage,
     AccountPage,
     SearchPage,
     TabsPage,
@@ -63,6 +67,8 @@ export function HttpLoaderFactory(http: Http) {
     MyApp,
     MyHuntsPage,
     HuntDetailsPage,
+    LocationDetailsPage,
+    LocationListPage,
     AccountPage,
     SearchPage,
     TabsPage,

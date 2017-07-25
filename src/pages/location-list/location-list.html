@@ -1,0 +1,21 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'Locations' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+     <ion-list>
+    <ion-list-header>
+      Locations for the Hunt
+    </ion-list-header>
+
+    <ion-item *ngFor="let location of locations" (click)="more(location)">
+      <ion-icon name="paper-plane" item-start color="primary"></ion-icon>
+      <ion-label>{{location.name}}</ion-label>
+      <ion-badge item-end color="primary">Not Found</ion-badge>
+    </ion-item>
+  </ion-list>
+</ion-content>

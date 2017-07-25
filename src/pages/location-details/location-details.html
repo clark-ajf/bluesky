@@ -1,0 +1,24 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'Location' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <img [src]="location.imageUrl"/>
+        <ion-card-content>
+            <ion-card-title>
+            {{location.name}}
+            </ion-card-title>
+            <p>
+            {{location.description}}
+            </p>
+        </ion-card-content>
+    </ion-card>
+    <div text-center>
+        <button ion-button (click)="scan()">Check-In</button>
+    </div>
+</ion-content>
