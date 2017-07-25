@@ -35,6 +35,7 @@ export class WelcomePage {
   }
 
   testLogin(){
+    //Creating dummy user to skip the login process in the browser (GooglePlus only works running the app in the device)
     this.sessionData.login({displayName: 'Test User', email: 'test@cmu.edu', familyName: 'User', givenName: 'Test', idToken: '0', imageUrl: 'http://www.gravatar.com/avatar?d=mm&s=140', userId: 0});
     this.navCtrl.setRoot(TabsPage);
   }
