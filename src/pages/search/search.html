@@ -10,5 +10,17 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-searchbar (ionInput)="getHunts($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar>
+  <ion-list>
+    <button ion-item (click)="openHunt(hunt)" *ngFor="let hunt of currentHunts">
+      <ion-avatar item-start>
+        <img [src]="hunt.img">
+      </ion-avatar>
+      <h2>{{hunt.name}}</h2>
+      <p>{{hunt.message}}</p>
+      <ion-note item-end>
+        {{hunt.time}}
+      </ion-note>
+    </button>
+  </ion-list>
 </ion-content>

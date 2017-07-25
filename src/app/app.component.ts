@@ -66,6 +66,7 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+    this.getUserData();
   }
 
   initTranslate() {
@@ -115,6 +116,10 @@ export class MyApp {
     this.events.subscribe('user:logout', () => {
       this.enableLoggedInMenu(false);
     });
+  }
+
+  ngAfterViewInit() {
+    this.getUserData();
   }
 
   enableLoggedInMenu(loggedIn) {
