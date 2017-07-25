@@ -18,6 +18,16 @@
             </p>
         </ion-card-content>
     </ion-card>
+    <ion-list>
+        <ion-list-header>
+        Hints
+        </ion-list-header>
+
+        <ion-item *ngFor="let hint of location.hints; let i = index" (click)="showHint(hint)">
+            <ion-icon name="information-circle" item-start color="dark"></ion-icon>
+            <ion-label>Hint {{i + 1}}</ion-label>
+        </ion-item>
+    </ion-list>
     <div text-center>
         <button *ngIf="location.status == 'not_found'" ion-button (click)="scan()">Check-In</button>
         <button *ngIf="location.status == 'found'" ion-button color="secondary">Location Found</button>
