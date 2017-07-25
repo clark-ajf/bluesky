@@ -15,7 +15,6 @@ import { SearchPage } from '../pages/search/search';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { WelcomePage } from '../pages/welcome/welcome';
-import { QRPage } from '../pages/qr/qr';
 
 import { SessionData } from '../providers/session.data';
 
@@ -46,8 +45,7 @@ export function HttpLoaderFactory(http: Http) {
     SearchPage,
     TabsPage,
     TutorialPage,
-    WelcomePage,
-    QRPage
+    WelcomePage
   ],
   imports: [
     BrowserModule,
@@ -73,8 +71,7 @@ export function HttpLoaderFactory(http: Http) {
     SearchPage,
     TabsPage,
     TutorialPage,
-    WelcomePage,
-    QRPage
+    WelcomePage
   ],
   providers: [
     Camera,

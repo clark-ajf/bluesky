@@ -10,7 +10,6 @@ import { SearchPage } from '../pages/search/search';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { WelcomePage } from '../pages/welcome/welcome';
-import { QRPage } from '../pages/qr/qr';
 
 import { SessionData } from '../providers/session.data';
 
@@ -30,8 +29,7 @@ export class MyApp {
   user: User;
 
   appPages: MenuItem[] = [
-    { title: 'Tutorial', component: TutorialPage, icon: 'bulb' },
-    { title: 'QR', component: QRPage, icon: 'qr-scanner' }
+    { title: 'Tutorial', component: TutorialPage, icon: 'bulb' }
   ]
 
   loggedInPages: MenuItem[] = [
