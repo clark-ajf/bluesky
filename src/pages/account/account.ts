@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
+import { GooglePlus } from '@ionic-native/google-plus';
+
+import { WelcomePage } from '../welcome/welcome';
+
+import { SessionData } from '../../providers/session.data';
+import { User } from '../../models/user';
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider
@@ -11,12 +17,37 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'account.html'
 })
 export class AccountPage {
+  user: User;
 
-  constructor(public navCtrl: NavController,
-    public navParams: NavParams,) {
+  constructor(private app: App, public nav: NavController, public navParams: NavParams, private sessionData: SessionData, private googlePlus: GooglePlus) {
   } 
 
   ionViewDidLoad() {
     // Build an empty form for the template to render
   }  
+
+  ngAfterViewInit() {
+    this.getUser();
+  }
+
+  getUser() {
+     return this.sessionData.getUser().then((user) => {
+      this.user = user;
+      return;
+    });
+  }
+
+  logout() {
+    this.user = null;
+    this.sessionData.logout();
+    this.googlePlus.logout();
+    this.app.getRootNavs()[0].setRoot(WelcomePage);
+  }
+
+  changeUser(){    
+    this.user = null;
+    this.sessionData.logout();
+    this.googlePlus.disconnect();
+    this.app.getRootNavs()[0].setRoot(WelcomePage);
+  }
 }

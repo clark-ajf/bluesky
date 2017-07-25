@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { MyHuntsPage } from '../my-hunts/my-hunts';
+import { TabsPage } from '../tabs/tabs';
 
 import { GooglePlus } from '@ionic-native/google-plus';
 
@@ -28,7 +28,7 @@ export class WelcomePage {
         console.log('good');
         console.log(res);
         this.sessionData.login(res);
-        this.navCtrl.setRoot(MyHuntsPage);
+        this.navCtrl.setRoot(TabsPage);
     }, (err) => {
         console.log(err);
     });
@@ -36,6 +36,6 @@ export class WelcomePage {
 
   testLogin(){
     this.sessionData.login({displayName: 'Test User', email: 'test@cmu.edu', familyName: 'User', givenName: 'Test', idToken: '0', imageUrl: '', userId: 0});
-    this.navCtrl.setRoot(MyHuntsPage);
+    this.navCtrl.setRoot(TabsPage);
   }
 }
