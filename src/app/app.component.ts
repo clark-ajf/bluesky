@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav, Config } from 'ionic-angular';
+import { Platform, Nav, Config, Events, MenuController } from 'ionic-angular';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -21,34 +21,55 @@ import { QRPage } from '../pages/qr/qr';
 
 import { Settings } from '../providers/providers';
 
-import { TranslateService } from '@ngx-translate/core'
+import { TranslateService } from '@ngx-translate/core';
+
+import { SessionData } from '../providers/session.data';
+import { User } from '../models/user';
+
+export interface MenuItem {
+  title: string;
+  component: any;
+  icon: string;
+  logsOut?: boolean;
+  index?: number;
+}
 
 @Component({
   templateUrl: 'app.template.html'
 })
 export class MyApp {
-  rootPage = FirstRunPage;
+  rootPage = WelcomePage;
 
   @ViewChild(Nav) nav: Nav;
+  user: User;
 
-  pages: any[] = [
-    //{ title: 'Tutorial', component: TutorialPage },
-    { title: 'Welcome', component: WelcomePage },
-    { title: 'QR', component: QRPage },
-    //{ title: 'Tabs', component: TabsPage },
-    { title: 'Cards', component: CardsPage },
-    { title: 'Content', component: ContentPage },
-    { title: 'Login', component: LoginPage },
-    { title: 'Signup', component: SignupPage },
-    //{ title: 'Map', component: MapPage },
-    { title: 'Hunts', component: ListMasterPage },
-    { title: 'Menu', component: MenuPage },
-    { title: 'Settings', component: SettingsPage },
-    { title: 'Search', component: SearchPage }
+  appPages: MenuItem[] = [
+    { title: 'QR', component: QRPage, icon: 'qr-scanner' }
   ]
 
-  constructor(private translate: TranslateService, private platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
+  loggedInPages: MenuItem[] = [
+    { title: 'My Hunts', component: ListMasterPage, icon: 'person' },
+    { title: 'Settings', component: SettingsPage, icon: 'cog' },
+    { title: 'Logout', component: LoginPage, icon: 'log-out', logsOut: true }
+  ];
+
+  loggedOutPages: MenuItem[] = [
+    { title: 'Login', component: LoginPage, icon: 'log-in' },
+    { title: 'Signup', component: SignupPage, icon: 'person-add' }
+  ];
+
+  constructor(private translate: TranslateService, private platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen, private events: Events, private menu: MenuController, private sessionData: SessionData) {
     this.initTranslate();
+
+    this.listenToLoginEvents();
+
+    this.sessionData.hasLoggedIn().then((hasLoggedIn) => {
+      this.enableMenu(hasLoggedIn === true)
+      if(hasLoggedIn === true){    
+        this.nav.setRoot(ListMasterPage);
+        this.getUser();
+      }
+    });
   }
 
   ionViewDidLoad() {
@@ -78,6 +99,49 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    if (page.index) {
+      this.nav.setRoot(page.component, {tabIndex: page.index});
+
+    } else {
+      this.nav.setRoot(page.component);
+    }
+
+    if (page.logsOut === true) {
+      // Give the menu time to close before changing to logged out
+      //this.sessionData.logout();
+    }
+  }
+
+  listenToLoginEvents() {
+    this.events.subscribe('user:login', () => {
+      this.enableMenu(true);
+      this.getUser();
+    });
+
+    this.events.subscribe('user:signup', () => {
+      this.enableMenu(true);
+      this.getUser();
+    });
+
+    this.events.subscribe('user:logout', () => {
+      this.enableMenu(false);
+    });
+  }
+
+  enableMenu(loggedIn) {
+    this.menu.enable(loggedIn, 'loggedInMenu');
+    this.menu.enable(!loggedIn, 'loggedOutMenu');
+  }
+
+  getUser() {
+     return this.sessionData.getUser().then((user) => {
+      this.user = user;
+      return;
+    });
+  }
+
+  logout() {
+    this.sessionData.logout();
+    this.nav.setRoot(WelcomePage);
   }
 }
