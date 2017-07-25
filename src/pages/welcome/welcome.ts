@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { ListMasterPage } from '../list-master/list-master';
+import { MyHuntsPage } from '../my-hunts/my-hunts';
 
 import { GooglePlus } from '@ionic-native/google-plus';
 
@@ -26,11 +26,16 @@ export class WelcomePage {
       'webClientId': '642810877670-e6ucbbgl8u53tie8mmac9iv73v02v4ma.apps.googleusercontent.com'
     }).then((res) => {
         console.log('good');
-        console.log(res.displayName);
+        console.log(res);
         this.sessionData.login(res);
-        this.navCtrl.setRoot(ListMasterPage);
+        this.navCtrl.setRoot(MyHuntsPage);
     }, (err) => {
         console.log(err);
     });
+  }
+
+  testLogin(){
+    this.sessionData.login({displayName: 'Test User', email: 'test@cmu.edu', familyName: 'User', givenName: 'Test', idToken: '0', imageUrl: '', userId: 0});
+    this.navCtrl.setRoot(MyHuntsPage);
   }
 }

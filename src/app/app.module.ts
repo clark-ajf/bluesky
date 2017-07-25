@@ -6,39 +6,24 @@ import { Storage, IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 
-import { CardsPage } from '../pages/cards/cards';
-import { ContentPage } from '../pages/content/content';
-import { ItemCreatePage } from '../pages/item-create/item-create';
-import { ItemDetailPage } from '../pages/item-detail/item-detail';
-import { ListMasterPage } from '../pages/list-master/list-master';
-import { LoginPage } from '../pages/login/login';
-import { MapPage } from '../pages/map/map';
-import { MenuPage } from '../pages/menu/menu';
-import { SearchPage } from '../pages/search/search';
-import { SettingsPage } from '../pages/settings/settings';
-import { SignupPage } from '../pages/signup/signup';
+import { MyHuntsPage } from '../pages/my-hunts/my-hunts';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { QRPage } from '../pages/qr/qr';
 
-import { Api } from '../providers/api';
-import { Items } from '../mocks/providers/items';
 import { Settings } from '../providers/settings';
-import { User } from '../providers/user';
+import { SessionData } from '../providers/session.data';
 
 import { Camera } from '@ionic-native/camera';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
-import { SessionData } from '../providers/session.data';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -64,17 +49,7 @@ export function provideSettings(storage: Storage) {
 @NgModule({
   declarations: [
     MyApp,
-    CardsPage,
-    ContentPage,
-    ItemCreatePage,
-    ItemDetailPage,
-    ListMasterPage,
-    LoginPage,
-    MapPage,
-    MenuPage,
-    SearchPage,
-    SettingsPage,
-    SignupPage,
+    MyHuntsPage,
     TabsPage,
     TutorialPage,
     WelcomePage,
@@ -96,26 +71,13 @@ export function provideSettings(storage: Storage) {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    CardsPage,
-    ContentPage,
-    ItemCreatePage,
-    ItemDetailPage,
-    ListMasterPage,
-    LoginPage,
-    MapPage,
-    MenuPage,
-    SearchPage,
-    SettingsPage,
-    SignupPage,
+    MyHuntsPage,
     TabsPage,
     TutorialPage,
     WelcomePage,
     QRPage
   ],
   providers: [
-    Api,
-    Items,
-    User,
     Camera,
     GoogleMaps,
     GooglePlus,
