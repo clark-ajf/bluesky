@@ -3,7 +3,8 @@ import { NavController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { MyHuntsPage } from '../my-hunts/my-hunts';
-import { SettingsPage } from '../settings/settings';
+import { SearchPage } from '../search/search';
+import { AccountPage } from '../account/account';
 
 @Component({
   selector: 'page-tabs',
@@ -11,15 +12,18 @@ import { SettingsPage } from '../settings/settings';
 })
 export class TabsPage {
   tab1Root: any = MyHuntsPage;
-  tab2Root: any = SettingsPage;
+  tab2Root: any = SearchPage;
+  tab3Root: any = AccountPage;
 
   tab1Title = "My Hunts";
-  tab2Title = "Settings";
+  tab2Title = "Search";
+  tab3Title = "Account";
 
   constructor(public navCtrl: NavController, public translateService: TranslateService) {
     translateService.get(['TAB1_TITLE', 'TAB2_TITLE', 'TAB3_TITLE']).subscribe(values => {
       this.tab1Title = values['TAB1_TITLE'];
       this.tab2Title = values['TAB2_TITLE'];
+      this.tab3Title = values['TAB3_TITLE'];
     });
   }
 }

@@ -5,13 +5,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { MyHuntsPage } from '../pages/my-hunts/my-hunts';
-import { SettingsPage } from '../pages/settings/settings';
+import { AccountPage } from '../pages/account/account';
+import { SearchPage } from '../pages/search/search';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { QRPage } from '../pages/qr/qr';
 
-import { Settings } from '../providers/settings';
 import { SessionData } from '../providers/session.data';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -37,21 +37,22 @@ export class MyApp {
   user: User;
 
   appPages: MenuItem[] = [
+    { title: 'Tutorial', component: TutorialPage, icon: 'bulb' },
     { title: 'QR', component: QRPage, icon: 'qr-scanner' }
   ]
 
   loggedInPages: MenuItem[] = [
-    { title: 'My Hunts', component: MyHuntsPage, icon: 'person' },
-    { title: 'Settings', component: SettingsPage, icon: 'cog' },
+    { title: 'My Hunts', component: MyHuntsPage, icon: 'locate' },
+    { title: 'Search', component: SearchPage, icon: 'search' },
+    { title: 'Account', component: AccountPage, icon: 'person' },
     { title: 'Logout', component: WelcomePage, icon: 'log-out', logsOut: true }
   ];
 
   loggedOutPages: MenuItem[] = [
-    { title: 'Login', component: WelcomePage, icon: 'log-in' },
-    { title: 'Signup', component: WelcomePage, icon: 'person-add' }
+    { title: 'Signup', component: WelcomePage, icon: 'log-in' }
   ];
 
-  constructor(private translate: TranslateService, private platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen, private events: Events, private menu: MenuController, private sessionData: SessionData, private googlePlus: GooglePlus) {
+  constructor(private translate: TranslateService, private platform: Platform, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen, private events: Events, private menu: MenuController, private sessionData: SessionData, private googlePlus: GooglePlus) {
     this.initTranslate();
 
     this.listenToLoginEvents();
@@ -101,7 +102,7 @@ export class MyApp {
 
     if (page.logsOut === true) {
       // Give the menu time to close before changing to logged out
-      //this.sessionData.logout();
+      this.logout();
     }
   }
 
@@ -134,12 +135,14 @@ export class MyApp {
   }
 
   logout() {
+    this.user = null;
     this.sessionData.logout();
     this.googlePlus.logout();
     this.nav.setRoot(WelcomePage);
   }
 
   changeUser(){    
+    this.user = null;
     this.sessionData.logout();
     this.googlePlus.disconnect();
     this.nav.setRoot(WelcomePage);
