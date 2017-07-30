@@ -1,0 +1,27 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'New Hunt' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-label color="primary" floating clearInput>Name</ion-label>
+            <ion-input></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" floating clearInput>Short Description</ion-label>
+            <ion-input></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" floating clearInput>Short Description</ion-label>
+            <ion-textarea></ion-textarea>
+        </ion-item>
+    </ion-list>
+    <div text-center>
+        <button ion-button round large (click)="start()">{{ 'Start' | translate }}</button>
+    </div>
+</ion-content>
