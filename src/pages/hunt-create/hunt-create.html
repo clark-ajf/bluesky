@@ -7,27 +7,34 @@
 </ion-header>
 
 <ion-content>
-    <ion-list>
+    <form [formGroup]="huntForm" (ngSubmit)="next()">
         <ion-item>
             <ion-label color="primary" floating clearInput>Name</ion-label>
-            <ion-input></ion-input>
+            <ion-input formControlName="name"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label color="primary" floating clearInput>Short Description</ion-label>
-            <ion-input></ion-input>
+            <ion-input formControlName="short_description"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label color="primary" floating clearInput>Full Description</ion-label>
-            <ion-textarea rows="10" maxLength="500"></ion-textarea>
+            <ion-textarea rows="10" maxLength="500" formControlName="long_description"></ion-textarea>
         </ion-item>
-        <ion-item>
-            <button ion-button icon-start (click)="selectPicture()" text-center>
-            <ion-icon name="image"></ion-icon>
+        <ion-item *ngIf="hunt?.img" text-center>
+            <img [src]="hunt.img" width="140px" height="80px"/>
+        </ion-item>
+        <ion-item text-center>
+            <button ion-button icon-start (click)="selectPicture(false)">
+                <ion-icon name="image"></ion-icon>
                 Select Image
             </button>
+            <button ion-button icon-start (click)="selectPicture(true)">
+                <ion-icon name="camera"></ion-icon>
+                Take Picture
+            </button>
         </ion-item>
-    </ion-list>
+    </form>
     <div text-center>
-        <button ion-button round large (click)="next()">{{ 'Next' | translate }}</button>
+        <button ion-button round large type="submit" [disabled]="!huntForm.valid || (hunt?.img == '')">{{ 'Next' | translate }}</button>
     </div>
 </ion-content>
