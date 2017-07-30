@@ -4,6 +4,7 @@ import { NavController, ModalController, NavParams } from 'ionic-angular';
 import { LocationAddPage } from '../location-add/location-add';
 
 import { Hunt } from '../../models/hunt';
+import { Location } from '../../models/location';
 
 @Component({
   selector: 'page-hunt-add-locations',
@@ -20,6 +21,16 @@ export class HuntAddLocationsPage {
   ionViewDidLoad() {}
 
   publishHunt(){}
+
+  editLocation(location: Location){
+    let modal = this.modal.create(LocationAddPage, {location: location});
+    modal.onDidDismiss(data => {
+      if(data){
+        this.hunt.locations.push(data);
+      }
+    });
+    modal.present();
+  }
 
   addLocation(){
     let modal = this.modal.create(LocationAddPage);

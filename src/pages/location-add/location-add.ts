@@ -18,13 +18,17 @@ export class LocationAddPage {
   private location: Location;
   private locationForm: FormGroup;
 
-  constructor(params: NavParams, public viewCtrl: ViewController, private camera: Camera, private formBuilder: FormBuilder, private toastCtrl: ToastController, private modal: ModalController) {
-    this.locationForm = this.formBuilder.group({
-          name: ['', Validators.compose([Validators.required])],
-          short_description: ['', Validators.compose([Validators.required])]
-      });
-
+  constructor(navParams: NavParams, public viewCtrl: ViewController, private camera: Camera, private formBuilder: FormBuilder, private toastCtrl: ToastController, private modal: ModalController) {
       this.location = { description: '', hints: [], name: '', imageUrl: '', qrToken: '', status: ''}
+
+      if(typeof navParams.get('location') !== 'undefined'){
+        this.location = <Location> navParams.get('location');
+      }
+
+      this.locationForm = this.formBuilder.group({
+          name: [this.location.name, Validators.compose([Validators.required])],
+          short_description: [this.location.description, Validators.compose([Validators.required])]
+      });
   }
 
   dismiss() {
