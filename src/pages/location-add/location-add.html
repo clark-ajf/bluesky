@@ -1,0 +1,51 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'New Location' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="locationForm" (ngSubmit)="submitLocation()">
+        <ion-item>
+            <ion-label color="primary" floating clearInput>Name</ion-label>
+            <ion-input formControlName="name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" floating clearInput>Short Description</ion-label>
+            <ion-input formControlName="short_description"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="location?.imageUrl" text-center>
+            <img [src]="location.imageUrl" width="140px" height="80px"/>
+        </ion-item>
+        <ion-item text-center>
+            <button ion-button icon-start type="button" (click)="selectPicture(false)">
+                <ion-icon name="image"></ion-icon>
+                Select Image
+            </button>
+            <button ion-button icon-start type="button" (click)="selectPicture(true)">
+                <ion-icon name="camera"></ion-icon>
+                Take Picture
+            </button>
+        </ion-item>
+        <ion-list>
+            <ion-list-header>
+            Hints
+            </ion-list-header>
+            <ion-item *ngFor="let hint of location.hints; let i = index" (click)="showHint(hint)">
+                <ion-icon name="information-circle" item-start color="dark"></ion-icon>
+                <ion-label>Hint {{i + 1}}</ion-label>
+            </ion-item>
+            <ion-item text-center>
+                <button ion-button icon-start type="button" (click)="addHint()">
+                    <ion-icon name="add"></ion-icon>
+                    Add Hint
+                </button>
+            </ion-item>
+        </ion-list>        
+        <div text-center>
+            <button ion-button round large type="submit" [disabled]="!locationForm.valid || (location?.imageUrl == '')">{{ 'Next' | translate }}</button>
+        </div>
+    </form>
+</ion-content>

@@ -30,7 +30,9 @@ export class HuntCreatePage {
   }
 
   next(){
+      console.log('y');
     if(this.huntForm.valid && this.hunt.img != ''){
+        console.log('x');
         let form = this.huntForm.value;
         this.hunt.name = form.name;
         this.hunt.message = form.short_description;

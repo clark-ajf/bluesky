@@ -24,17 +24,17 @@
             <img [src]="hunt.img" width="140px" height="80px"/>
         </ion-item>
         <ion-item text-center>
-            <button ion-button icon-start (click)="selectPicture(false)">
+            <button ion-button icon-start type="button" (click)="selectPicture(false)">
                 <ion-icon name="image"></ion-icon>
                 Select Image
             </button>
-            <button ion-button icon-start (click)="selectPicture(true)">
+            <button ion-button icon-start type="button" (click)="selectPicture(true)">
                 <ion-icon name="camera"></ion-icon>
                 Take Picture
             </button>
         </ion-item>
+        <div text-center>
+            <button ion-button round large type="submit" [disabled]="!huntForm.valid || (hunt?.img == '')">{{ 'Next' | translate }}</button>
+        </div>
     </form>
-    <div text-center>
-        <button ion-button round large type="submit" [disabled]="!huntForm.valid || (hunt?.img == '')">{{ 'Next' | translate }}</button>
-    </div>
 </ion-content>
