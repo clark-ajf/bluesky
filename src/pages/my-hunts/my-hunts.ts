@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 
 import { HuntDetailsPage } from '../hunt-details/hunt-details';
+import { HuntCreatePage } from '../hunt-create/hunt-create';
 
 import { Hunt } from '../../models/hunt';
 
@@ -35,6 +36,10 @@ export class MyHuntsPage {
   }
 
   ionViewDidLoad() {
+  }
+
+  addHunt(){
+    this.navCtrl.push(HuntCreatePage);
   }
 
   archive(item: Hunt){
