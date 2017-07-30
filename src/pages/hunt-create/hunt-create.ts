@@ -3,7 +3,7 @@ import { NavController, ModalController, NavParams } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
-import { LocationListPage } from '../location-list/location-list';
+import { HuntAddLocationsPage } from '../hunt-add-locations/hunt-add-locations';
 
 import { Hunt } from '../../models/hunt';
 
@@ -23,7 +23,7 @@ export class HuntCreatePage {
           long_description: ['', Validators.compose([Validators.required])]
       });
 
-      this.hunt = { img: '', message: '', name: '', time: ''}
+      this.hunt = { img: '', message: '', name: '', time: '', locations: []}
   }
 
   ionViewDidLoad() {
@@ -34,7 +34,7 @@ export class HuntCreatePage {
         let form = this.huntForm.value;
         this.hunt.name = form.name;
         this.hunt.message = form.short_description;
-        //this.navCtrl.push(AddLocationsPage, {hunt: this.hunt});
+        this.navCtrl.push(HuntAddLocationsPage, {hunt: this.hunt});
     }
   }
 

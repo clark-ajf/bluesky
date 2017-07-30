@@ -21,17 +21,20 @@ export class SearchPage {
         img: 'assets/img/speakers/cmu.jpg',
         name: 'CMU Silicon Valley',
         message: 'Explore CMU Silicon Valley',
-        time: '9:38 pm'
+        time: '9:38 pm',
+        locations: []
       }, {
         img: 'assets/img/speakers/car.jpg',
         name: 'Fake Car Intern Welcome',
         message: 'Fake Car Intern Orientation',
-        time: '8:59 pm'
+        time: '8:59 pm',
+        locations: []
       }, {
         img: 'assets/img/speakers/mtv.jpg',
         name: 'Mountain View Mission',
         message: 'Discover the coolest sights in Mountain View',
-        time: 'Wed'
+        time: 'Wed',
+        locations: []
       }];
   }
 
