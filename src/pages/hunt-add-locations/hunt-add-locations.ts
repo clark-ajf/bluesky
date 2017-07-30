@@ -23,8 +23,6 @@ export class HuntAddLocationsPage {
 
   addLocation(){
     let modal = this.modal.create(LocationAddPage);
-
-    //modal.showBackButton(true);
     modal.onDidDismiss(data => {
       if(data){
         this.hunt.locations.push(data);

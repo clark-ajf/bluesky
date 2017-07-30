@@ -12,6 +12,7 @@ import { HuntAddLocationsPage } from '../pages/hunt-add-locations/hunt-add-locat
 import { HuntDetailsPage } from '../pages/hunt-details/hunt-details';
 import { LocationDetailsPage } from '../pages/location-details/location-details';
 import { LocationListPage } from '../pages/location-list/location-list';
+import { LocationAddPage } from '../pages/location-add/location-add';
 import { AccountPage } from '../pages/account/account';
 import { SearchPage } from '../pages/search/search';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -45,6 +46,7 @@ export function HttpLoaderFactory(http: Http) {
     HuntDetailsPage,
     LocationDetailsPage,
     LocationListPage,
+    LocationAddPage,
     AccountPage,
     SearchPage,
     TabsPage,
@@ -73,6 +75,7 @@ export function HttpLoaderFactory(http: Http) {
     HuntDetailsPage,
     LocationDetailsPage,
     LocationListPage,
+    LocationAddPage,
     AccountPage,
     SearchPage,
     TabsPage,
