@@ -28,7 +28,7 @@ export class LocationAddHintPage {
     this.viewCtrl.dismiss();
   }
 
-  submitLocation() {
+  submitHint() {
     if(this.hintForm.valid){
         let form = this.hintForm.value;
         this.hint.message = form.message;
