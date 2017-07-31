@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { NavParams, ViewController, ToastController, ModalController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+
+import CryptoJS from 'crypto-js';
 
 import { LocationAddHintPage } from '../location-add-hint/location-add-hint';
+import { LocationQRCodePage } from '../location-qrcode/location-qrcode';
 
 import { Location } from '../../models/location';
 
@@ -19,7 +22,7 @@ export class LocationAddPage {
   private locationForm: FormGroup;
 
   constructor(navParams: NavParams, public viewCtrl: ViewController, private camera: Camera, private formBuilder: FormBuilder, private toastCtrl: ToastController, private modal: ModalController) {
-      this.location = { description: '', hints: [], name: '', imageUrl: '', qrToken: '', status: ''}
+      this.location = { description: '', hints: [], name: '', imageUrl: '', qrToken: CryptoJS.HmacSHA256(new Date().getTime(), "bluesky").toString(CryptoJS.enc.Base64), status: ''}
 
       if(typeof navParams.get('location') !== 'undefined'){
         this.location = <Location> navParams.get('location');
@@ -61,6 +64,11 @@ export class LocationAddPage {
         this.location.hints.push(data);
       }
     });
+    modal.present();
+  }
+
+  showQRCode(){
+    let modal = this.modal.create(LocationQRCodePage, {qrcode: this.location.qrToken});
     modal.present();
   }
 

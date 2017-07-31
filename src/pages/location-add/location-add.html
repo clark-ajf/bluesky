@@ -43,9 +43,12 @@
                     Add Hint
                 </button>
             </ion-item>
-        </ion-list>        
+        </ion-list>
         <div text-center>
-            <button ion-button round large type="submit" [disabled]="!locationForm.valid || (location?.imageUrl == '')">{{ 'Next' | translate }}</button>
+            <button ion-button round large type="button" (click)="showQRCode()">{{ 'QR Code' | translate }}</button>
+        </div>
+        <div text-center>
+            <button ion-button round large type="submit" [disabled]="!locationForm.valid || (location?.imageUrl == '')">{{ 'Submit Location' | translate }}</button>
         </div>
     </form>
 </ion-content>

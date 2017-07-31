@@ -1,0 +1,23 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'Location Code' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-item text-center>
+        <ngx-qrcode #qrcodeImage [qrc-value]="qrcode" ></ngx-qrcode>
+    </ion-item>
+    <ion-item text-center>
+        <button ion-button icon-start type="button" (click)="saveImage()">
+            <ion-icon name="image"></ion-icon>
+            Save Image
+        </button>
+        <button ion-button icon-start type="button" (click)="print()">
+            <ion-icon name="print"></ion-icon>
+            Print
+        </button>
+    </ion-item>
+</ion-content>

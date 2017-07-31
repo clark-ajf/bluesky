@@ -14,6 +14,7 @@ import { LocationDetailsPage } from '../pages/location-details/location-details'
 import { LocationListPage } from '../pages/location-list/location-list';
 import { LocationAddPage } from '../pages/location-add/location-add';
 import { LocationAddHintPage } from '../pages/location-add-hint/location-add-hint';
+import { LocationQRCodePage } from '../pages/location-qrcode/location-qrcode';
 import { AccountPage } from '../pages/account/account';
 import { SearchPage } from '../pages/search/search';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -28,6 +29,9 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
+import { Printer } from '@ionic-native/printer';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -49,6 +53,7 @@ export function HttpLoaderFactory(http: Http) {
     LocationListPage,
     LocationAddPage,
     LocationAddHintPage,
+    LocationQRCodePage,
     AccountPage,
     SearchPage,
     TabsPage,
@@ -58,6 +63,7 @@ export function HttpLoaderFactory(http: Http) {
   imports: [
     BrowserModule,
     HttpModule,
+    NgxQRCodeModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -79,6 +85,7 @@ export function HttpLoaderFactory(http: Http) {
     LocationListPage,
     LocationAddPage,
     LocationAddHintPage,
+    LocationQRCodePage,
     AccountPage,
     SearchPage,
     TabsPage,
@@ -92,6 +99,8 @@ export function HttpLoaderFactory(http: Http) {
     SplashScreen,
     StatusBar,
     BarcodeScanner,
+    Base64ToGallery,
+    Printer,
     SessionData,
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }
