@@ -17,7 +17,7 @@ export class LocationListPage {
 
     this.locations = [
       {
-        qrToken: '1234',
+        qrToken: 'mJ9YLW1pSmOGI98llLPyrlikKxVC803uuB+8uevVADc=',
         imageUrl: 'assets/img/locations/SV_campus.jpg',
         name: 'Location 1',
         description: 'Main building on Campus, with a sign hard to forget!',

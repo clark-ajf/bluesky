@@ -26,7 +26,22 @@ export class LocationDetailsPage {
             prompt : "Scan QR Code "
         }
         this.barcodeScanner.scan(this.options).then((barcodeData) => {
-            console.log(barcodeData);
+            if(barcodeData.text == this.location.qrToken){
+                const toast = this.toastCtrl.create({
+                    message: 'Congratulation You Found the secret!',
+                    showCloseButton: true,
+                    closeButtonText: 'Ok'
+                });
+                toast.present();
+                this.location.status = 'found';
+            }else{
+                const toast = this.toastCtrl.create({
+                    message: 'Ops! That QR Code is the one you are looking for!',
+                    showCloseButton: true,
+                    closeButtonText: 'Ok'
+                });
+                toast.present();
+            }
         }, (err) => {
             console.log("Error occured : " + err);
             const toast = this.toastCtrl.create({
