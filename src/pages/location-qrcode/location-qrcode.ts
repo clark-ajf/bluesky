@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavParams, ViewController } from 'ionic-angular';
+import { NavParams, ViewController, ToastController, LoadingController } from 'ionic-angular';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 import { Printer, PrintOptions } from '@ionic-native/printer';
 
@@ -17,7 +17,7 @@ export class LocationQRCodePage {
   private qrcode: string;
   private imageData: string;
 
-  constructor(navParams: NavParams, public viewCtrl: ViewController, private printer: Printer, private base64ToGallery: Base64ToGallery) {
+  constructor(navParams: NavParams, public viewCtrl: ViewController, private printer: Printer, private base64ToGallery: Base64ToGallery, private toastCtrl: ToastController, private loadingCtrl: LoadingController) {
     this.qrcode = <string> navParams.get('qrcode');
   }
 
@@ -34,15 +34,26 @@ export class LocationQRCodePage {
   }
 
   saveImage(){
+    let loading = this.loadingCtrl.create({content: 'Loading...'});
     this.base64ToGallery.base64ToGallery(this.imageData, { prefix: 'bluesky_' }).then(
-        res => console.log('Saved image to gallery ', res),
-        err => console.log('Error saving image to gallery ', err)
+        (path) => {
+            loading.dismiss();
+            const toast = this.toastCtrl.create({
+                message: 'QR Code Saved Successfully in your Gallery',
+                showCloseButton: true,
+                closeButtonText: 'Ok'
+            });
+            toast.present();
+        },
+        (error) => {
+            loading.dismiss();
+            console.log(error);
+        }
     );
   }
 
   print(){
       this.printer.check().then((data) => {
-          console.log(data);
           if(data){
             this.printer.pick().then((uri) => {
                 let options: PrintOptions = {
