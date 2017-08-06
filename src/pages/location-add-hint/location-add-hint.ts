@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { NavParams, ViewController, ToastController, ModalController } from 'ionic-angular';
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { NavParams, ViewController } from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { Hint } from '../../models/hint';
 

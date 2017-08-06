@@ -3,7 +3,7 @@ import { NavParams, ViewController, ToastController, LoadingController } from 'i
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 import { Printer, PrintOptions } from '@ionic-native/printer';
 
-import { NgxQRCodeModule, NgxQRCodeComponent } from 'ngx-qrcode2';
+import { NgxQRCodeComponent } from 'ngx-qrcode2';
 
 
 @Component({

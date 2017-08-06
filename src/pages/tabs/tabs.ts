@@ -11,7 +11,6 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { WelcomePage } from '../welcome/welcome';
 
 import { SessionData } from '../../providers/session.data';
-import { User } from '../../models/user';
 
 @Component({
   selector: 'page-tabs',
