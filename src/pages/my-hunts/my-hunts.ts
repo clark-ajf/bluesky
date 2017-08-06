@@ -6,6 +6,7 @@ import { HuntCreatePage } from '../hunt-create/hunt-create';
 import { SearchPage } from '../search/search';
 
 import { SessionData } from '../../providers/session.data';
+import { HuntService } from '../../providers/hunt.service';
 
 import { Hunt } from '../../models/hunt';
 import { User } from '../../models/user';
@@ -21,31 +22,111 @@ export class MyHuntsPage {
   completedHunts: Hunt[];
   user: User;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private sessionData: SessionData) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private sessionData: SessionData, private huntService: HuntService) {
 
     this.activeHunts = [
       {
-        img: 'assets/img/speakers/cmu.jpg',
+        _id: '',
+        imageUrl: 'assets/img/speakers/cmu.jpg',
         name: 'CMU Silicon Valley',
-        message: 'Explore CMU Silicon Valley',
-        time: '9:38 pm',
-        locations: []
+        shortDescription: 'Explore CMU Silicon Valley',
+        longDescription: '',
+        isDeleted: false,
+        owner: { _id: '', displayName: 'Test User', email: 'test@cmu.edu', familyName: 'User', givenName: 'Test', idToken: '0', imageUrl: 'http://www.gravatar.com/avatar?d=mm&s=140', userId: 0, organizer: true },
+        locations: [
+        {
+          _id: '',
+          qrToken: 'mJ9YLW1pSmOGI98llLPyrlikKxVC803uuB+8uevVADc=',
+          imageUrl: 'assets/img/locations/SV_campus.jpg',
+          name: 'Location 1',
+          description: 'Main building on Campus, with a sign hard to forget!',
+          status: 'not_found',
+          clues: [
+              {message: 'Lorem Ipsum'}
+          ]
+        },
+        {          
+          _id: '',
+          qrToken: '12345',
+          imageUrl: 'assets/img/locations/cmu_sv_fence.jpg',
+          name: 'Location 2',
+          description: 'By today the colors should be different, it changes every year!',
+          status: 'found',
+          clues: [
+              {message: 'Lorem Ipsum'}
+          ]
+        }]
       }, {
-        img: 'assets/img/speakers/car.jpg',
+        _id: '',
+        imageUrl: 'assets/img/speakers/car.jpg',
         name: 'Fake Car Intern Welcome',
-        message: 'Fake Car Intern Orientation',
-        time: '8:59 pm',
-        locations: []
+        shortDescription: 'Fake Car Intern Orientation',
+        longDescription: '',
+        isDeleted: false,
+        owner: { _id: '', displayName: 'Test User', email: 'test@cmu.edu', familyName: 'User', givenName: 'Test', idToken: '0', imageUrl: 'http://www.gravatar.com/avatar?d=mm&s=140', userId: 0, organizer: true },
+        locations: [
+        {          
+          _id: '',
+          qrToken: 'mJ9YLW1pSmOGI98llLPyrlikKxVC803uuB+8uevVADc=',
+          imageUrl: 'assets/img/locations/SV_campus.jpg',
+          name: 'Location 1',
+          description: 'Main building on Campus, with a sign hard to forget!',
+          status: 'not_found',
+          clues: [
+              {message: 'Lorem Ipsum'}
+          ]
+        },
+        {          
+          _id: '',
+          qrToken: '12345',
+          imageUrl: 'assets/img/locations/cmu_sv_fence.jpg',
+          name: 'Location 2',
+          description: 'By today the colors should be different, it changes every year!',
+          status: 'found',
+          clues: [
+              {message: 'Lorem Ipsum'}
+          ]
+        }]
       }, {
-        img: 'assets/img/speakers/mtv.jpg',
+        _id: '',
+        imageUrl: 'assets/img/speakers/mtv.jpg',
         name: 'Mountain View Mission',
-        message: 'Discover the coolest sights in Mountain View',
-        time: 'Wed',
-        locations: []
+        shortDescription: 'Discover the coolest sights in Mountain View',
+        longDescription: '',
+        isDeleted: false,
+        owner: { _id: '', displayName: 'Test User', email: 'test@cmu.edu', familyName: 'User', givenName: 'Test', idToken: '0', imageUrl: 'http://www.gravatar.com/avatar?d=mm&s=140', userId: 0, organizer: true },
+        locations: [
+        {          
+          _id: '',
+          qrToken: 'mJ9YLW1pSmOGI98llLPyrlikKxVC803uuB+8uevVADc=',
+          imageUrl: 'assets/img/locations/SV_campus.jpg',
+          name: 'Location 1',
+          description: 'Main building on Campus, with a sign hard to forget!',
+          status: 'not_found',
+          clues: [
+              {message: 'Lorem Ipsum'}
+          ]
+        },
+        {          
+          _id: '',
+          qrToken: '12345',
+          imageUrl: 'assets/img/locations/cmu_sv_fence.jpg',
+          name: 'Location 2',
+          description: 'By today the colors should be different, it changes every year!',
+          status: 'found',
+          clues: [
+              {message: 'Lorem Ipsum'}
+          ]
+        }]
       }];
+
+    
   }
 
-  ionViewDidLoad() {
+  loadData() {
+    this.huntService.getHuntsByUser(this.user._id).subscribe(hunts => {
+      this.completedHunts = hunts;
+    });
   }
 
   ngAfterViewInit() {
@@ -55,6 +136,7 @@ export class MyHuntsPage {
   getUserData() {
      return this.sessionData.getUser().then((user: User) => {
       this.user = user;
+      this.loadData();
       return;
     });
   }

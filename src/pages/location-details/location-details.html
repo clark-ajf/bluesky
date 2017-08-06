@@ -20,12 +20,12 @@
     </ion-card>
     <ion-list>
         <ion-list-header>
-        Hints
+        Clues
         </ion-list-header>
 
-        <ion-item *ngFor="let hint of location.hints; let i = index" (click)="showHint(hint)">
+        <ion-item *ngFor="let clue of location.clues; let i = index" (click)="showClue(clue)">
             <ion-icon name="information-circle" item-start color="dark"></ion-icon>
-            <ion-label>Hint {{i + 1}}</ion-label>
+            <ion-label>Clue {{i + 1}}</ion-label>
         </ion-item>
     </ion-list>
     <div text-center>

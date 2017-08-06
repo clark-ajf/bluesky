@@ -20,8 +20,8 @@
             <ion-label color="primary" floating clearInput>Full Description</ion-label>
             <ion-textarea rows="10" maxLength="500" formControlName="long_description"></ion-textarea>
         </ion-item>
-        <ion-item *ngIf="hunt?.img" text-center>
-            <img [src]="hunt.img" width="140px" height="80px"/>
+        <ion-item *ngIf="hunt?.imageUrl" text-center>
+            <img [src]="hunt.imageUrl" width="140px" height="80px"/>
         </ion-item>
         <ion-item text-center>
             <button ion-button icon-start type="button" (click)="selectPicture(false)">
@@ -34,7 +34,7 @@
             </button>
         </ion-item>
         <div text-center>
-            <button ion-button round large type="submit" [disabled]="!huntForm.valid || (hunt?.img == '')">{{ 'Next' | translate }}</button>
+            <button ion-button round large type="submit" [disabled]="!huntForm.valid || (hunt?.imageUrl == '')">{{ 'Next' | translate }}</button>
         </div>
     </form>
 </ion-content>

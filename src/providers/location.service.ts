@@ -15,8 +15,8 @@ export class LocationService {
         this.serviceUrl = config.ServerWithApiUrl + this.serviceUrl;
     }
 
-    getHunts(): Observable<Location[]> {
-        return this.http.get(this.serviceUrl)
+    getHuntLocationsByUser(userId: string, huntId: string): Observable<Location[]> {
+        return this.http.get(this.serviceUrl + '/' + userId + '/' + huntId)
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().message || 'Server error'));
     }

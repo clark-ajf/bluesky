@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, ModalController, NavParams } from 'ionic-angular';
 
 import { LocationAddPage } from '../location-add/location-add';
+import { MyHuntsPage } from '../my-hunts/my-hunts';
+
+import { HuntService } from '../../providers/hunt.service';
 
 import { Hunt } from '../../models/hunt';
 import { Location } from '../../models/location';
@@ -14,13 +17,18 @@ export class HuntAddLocationsPage {
 
   private hunt: Hunt;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private modal: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private modal: ModalController, private huntService: HuntService) {
       this.hunt = <Hunt> navParams.get('hunt');
   }
 
   ionViewDidLoad() {}
 
-  publishHunt(){}
+  publishHunt(){
+    this.huntService.saveHunt(this.hunt).subscribe(hunt => {
+      console.log(hunt);
+      this.navCtrl.setRoot(MyHuntsPage);
+    });
+  }
 
   editLocation(location: Location){
     let modal = this.modal.create(LocationAddPage, {location: location});

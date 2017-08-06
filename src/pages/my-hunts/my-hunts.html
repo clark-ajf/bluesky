@@ -29,13 +29,10 @@
     <ion-item-sliding *ngFor="let hunt of activeHunts">
       <ion-item (click)="more(hunt)">
         <ion-avatar item-start>
-          <img [src]="hunt.img">
+          <img [src]="hunt.imageUrl">
         </ion-avatar>
         <h2>{{hunt.name}}</h2>
-        <p>{{hunt.message}}</p>
-        <ion-note item-end>
-          {{hunt.time}}
-        </ion-note>
+        <p>{{hunt.shortDescription}}</p>
       </ion-item>
 
       <ion-item-options>
@@ -71,13 +68,10 @@
     <ion-item-sliding *ngFor="let hunt of myHunts">
       <ion-item (click)="more(hunt)">
         <ion-avatar item-start>
-          <img [src]="hunt.img">
+          <img [src]="hunt.imageUrl">
         </ion-avatar>
         <h2>{{hunt.name}}</h2>
-        <p>{{hunt.message}}</p>
-        <ion-note item-end>
-          {{hunt.time}}
-        </ion-note>
+        <p>{{hunt.shortDescription}}</p>
       </ion-item>
 
       <ion-item-options>
@@ -112,13 +106,10 @@
     <ion-item-sliding *ngFor="let hunt of completedHunts">
       <ion-item (click)="more(hunt)">
         <ion-avatar item-start>
-          <img [src]="hunt.img">
+          <img [src]="hunt.imageUrl">
         </ion-avatar>
         <h2>{{hunt.name}}</h2>
-        <p>{{hunt.message}}</p>
-        <ion-note item-end>
-          {{hunt.time}}
-        </ion-note>
+        <p>{{hunt.shortDescription}}</p>
       </ion-item>
 
       <ion-item-options>

@@ -14,13 +14,10 @@
   <ion-list>
     <button ion-item (click)="openHunt(hunt)" *ngFor="let hunt of currentHunts">
       <ion-avatar item-start>
-        <img [src]="hunt.img">
+        <img [src]="hunt.imageUrl">
       </ion-avatar>
       <h2>{{hunt.name}}</h2>
-      <p>{{hunt.message}}</p>
-      <ion-note item-end>
-        {{hunt.time}}
-      </ion-note>
+      <p>{{hunt.shortDescription}}</p>
     </button>
   </ion-list>
 </ion-content>

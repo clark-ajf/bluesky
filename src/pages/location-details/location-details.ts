@@ -36,7 +36,7 @@ export class LocationDetailsPage {
                 this.location.status = 'found';
             }else{
                 const toast = this.toastCtrl.create({
-                    message: 'Ops! That QR Code is the one you are looking for!',
+                    message: 'Ops! That QR Code is not the one you are looking for!',
                     showCloseButton: true,
                     closeButtonText: 'Ok'
                 });
@@ -53,9 +53,9 @@ export class LocationDetailsPage {
         });   
     }
 
-    showHint(hint){
+    showClue(clue){
         const toast = this.toastCtrl.create({
-            message: hint.message,
+            message: clue.message,
             showCloseButton: true,
             closeButtonText: 'Ok'
         });

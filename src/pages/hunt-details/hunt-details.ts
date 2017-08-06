@@ -21,6 +21,6 @@ export class HuntDetailsPage {
   }
 
   start(){
-    this.navCtrl.push(LocationListPage);
+    this.navCtrl.push(LocationListPage, {hunt: this.hunt});
   }
 }

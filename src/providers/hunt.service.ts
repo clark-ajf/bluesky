@@ -21,12 +21,18 @@ export class HuntService {
             .catch((error: any) => Observable.throw(error.json().message || 'Server error'));
     }
 
-    saveHunt(userId: string, body: Object): Observable<Hunt> {
-        let bodyString = JSON.stringify(body);
+    getHuntsByUser(userId: string): Observable<Hunt[]> {
+        return this.http.get(this.serviceUrl + '/' + userId)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().message || 'Server error'));
+    }
+
+    saveHunt(hunt: Hunt): Observable<Hunt> {
+        let bodyString = JSON.stringify(hunt);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this.serviceUrl + '/' + userId, bodyString, options)
+        return this.http.post(this.serviceUrl, bodyString, options)
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().message || 'Server error'));
     }

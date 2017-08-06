@@ -14,7 +14,7 @@ import { HuntDetailsPage } from '../pages/hunt-details/hunt-details';
 import { LocationDetailsPage } from '../pages/location-details/location-details';
 import { LocationListPage } from '../pages/location-list/location-list';
 import { LocationAddPage } from '../pages/location-add/location-add';
-import { LocationAddHintPage } from '../pages/location-add-hint/location-add-hint';
+import { LocationAddCluePage } from '../pages/location-add-hint/location-add-clue';
 import { LocationQRCodePage } from '../pages/location-qrcode/location-qrcode';
 import { AccountPage } from '../pages/account/account';
 import { SearchPage } from '../pages/search/search';
@@ -56,7 +56,7 @@ export function HttpLoaderFactory(http: Http) {
     LocationDetailsPage,
     LocationListPage,
     LocationAddPage,
-    LocationAddHintPage,
+    LocationAddCluePage,
     LocationQRCodePage,
     AccountPage,
     SearchPage,
@@ -88,7 +88,7 @@ export function HttpLoaderFactory(http: Http) {
     LocationDetailsPage,
     LocationListPage,
     LocationAddPage,
-    LocationAddHintPage,
+    LocationAddCluePage,
     LocationQRCodePage,
     AccountPage,
     SearchPage,

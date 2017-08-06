@@ -5,7 +5,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import CryptoJS from 'crypto-js';
 
-import { LocationAddHintPage } from '../location-add-hint/location-add-hint';
+import { LocationAddCluePage } from '../location-add-hint/location-add-clue';
 import { LocationQRCodePage } from '../location-qrcode/location-qrcode';
 
 import { Location } from '../../models/location';
@@ -22,7 +22,7 @@ export class LocationAddPage {
   private locationForm: FormGroup;
 
   constructor(navParams: NavParams, public viewCtrl: ViewController, private camera: Camera, private formBuilder: FormBuilder, private toastCtrl: ToastController, private modal: ModalController) {
-      this.location = { description: '', hints: [], name: '', imageUrl: '', qrToken: CryptoJS.HmacSHA256(new Date().getTime(), "bluesky").toString(CryptoJS.enc.Base64), status: ''}
+      this.location = { _id: '', description: '', clues: [], name: '', imageUrl: '', qrToken: CryptoJS.HmacSHA256(new Date().getTime(), "bluesky").toString(CryptoJS.enc.Base64), status: ''}
 
       if(typeof navParams.get('location') !== 'undefined'){
         this.location = <Location> navParams.get('location');
@@ -48,20 +48,20 @@ export class LocationAddPage {
     }
   }
 
-  showHint(hint){
+  showClue(clue){
       const toast = this.toastCtrl.create({
-          message: hint.message,
+          message: clue.message,
           showCloseButton: true,
           closeButtonText: 'Ok'
       });
       toast.present();
   }
 
-  addHint(){
-    let modal = this.modal.create(LocationAddHintPage);
+  addClue(){
+    let modal = this.modal.create(LocationAddCluePage);
     modal.onDidDismiss(data => {
       if(data){
-        this.location.hints.push(data);
+        this.location.clues.push(data);
       }
     });
     modal.present();
@@ -74,13 +74,14 @@ export class LocationAddPage {
 
   selectPicture(takePicture: boolean){
     const options: CameraOptions = {
-        quality: 100,
+        quality: 40,
         destinationType: this.camera.DestinationType.DATA_URL,
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE,
         sourceType: takePicture? this.camera.PictureSourceType.CAMERA : this.camera.PictureSourceType.SAVEDPHOTOALBUM,
-        targetHeight: 400,
-        targetWidth: 700
+        targetHeight: 200,
+        targetWidth: 350,
+        correctOrientation: true
     }    
 
     this.camera.getPicture(options).then((imageData) => {

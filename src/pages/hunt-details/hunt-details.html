@@ -8,13 +8,16 @@
 
 <ion-content>
     <ion-card>
-        <img [src]="hunt.img"/>
+        <img [src]="hunt.imageUrl"/>
         <ion-card-content>
             <ion-card-title>
             {{hunt.name}}
             </ion-card-title>
             <p>
-            {{hunt.message}}
+            {{hunt.shortDescription}}
+            </p>
+            <p>
+            {{hunt.longDescription}}
             </p>
         </ion-card-content>
     </ion-card>

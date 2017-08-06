@@ -1,4 +1,4 @@
-export class Hint {
+export class Clue {
     constructor(
         public message: string
         ){}
