@@ -24,23 +24,23 @@ export class WelcomePage {
 
   constructor(public navCtrl: NavController, public googlePlus: GooglePlus, private sessionData: SessionData, private userService: UserService, private loadingCtrl: LoadingController, private toastCtrl: ToastController) { }
 
-  signupGoogle(){
-    let loading = this.loadingCtrl.create({content: 'Loading...'});
+  signupGoogle() {
+    let loading = this.loadingCtrl.create({ content: 'Loading...' });
     this.googlePlus.login({
       'webClientId': '642810877670-e6ucbbgl8u53tie8mmac9iv73v02v4ma.apps.googleusercontent.com'
     }).then((response) => {
-      if(response){
+      if (response) {
         response.organizer = false;
         this.userService.loginOrSignUp(response).subscribe(user => {
           loading.dismiss();
-          if(user){
+          if (user) {
             this.sessionData.login(response);
             this.navCtrl.setRoot(TabsPage);
-          }else{
+          } else {
             this.showMessage('API Login/Signup failed');
           }
         });
-      }else{
+      } else {
         loading.dismiss();
         this.showMessage('Google Plus Login/SignUp failed');
       }
@@ -51,26 +51,26 @@ export class WelcomePage {
   }
 
   //Creating dummy user to skip the login process in the browser (GooglePlus only works running the app in the device)
-  testLogin(){
-    let loading = this.loadingCtrl.create({content: 'Loading...'});
-    
-    let dummyUser: User = {displayName: 'Test User', email: 'test@cmu.edu', familyName: 'User', givenName: 'Test', idToken: '0', imageUrl: 'http://www.gravatar.com/avatar?d=mm&s=140', userId: 0, organizer: true}
+  testLogin() {
+    let loading = this.loadingCtrl.create({ content: 'Loading...' });
+
+    let dummyUser: User = { displayName: 'Test User', email: 'test@cmu.edu', familyName: 'User', givenName: 'Test', idToken: '0', imageUrl: 'http://www.gravatar.com/avatar?d=mm&s=140', userId: 0, organizer: true }
     this.userService.loginOrSignUp(dummyUser).subscribe(user => {
       loading.dismiss();
-      if(user){
+      if (user) {
         this.sessionData.login(dummyUser);
         this.navCtrl.setRoot(TabsPage);
-      }else{
+      } else {
         this.showMessage('API Login/Signup failed');
       }
     });
   }
 
-  showMessage(message: string){
+  showMessage(message: string) {
     const toast = this.toastCtrl.create({
-        message: message,
-        showCloseButton: true,
-        closeButtonText: 'Ok'
+      message: message,
+      showCloseButton: true,
+      closeButtonText: 'Ok'
     });
     toast.present();
   }

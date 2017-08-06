@@ -6,7 +6,7 @@
     </button>
     <ion-title>{{ 'My Hunts' | translate }}</ion-title>
 
-    <ion-buttons end>
+    <ion-buttons *ngIf="user?.organizer" end>
       <button ion-button icon-only (click)="addHunt()">
         <ion-icon name="add"></ion-icon>
       </button>
@@ -20,8 +20,96 @@
     <ion-list-header>
       Active Hunts
     </ion-list-header>
+    <ion-item *ngIf="!activeHunts || activeHunts?.length == 0" (click)="joinHunt()">
+      <ion-icon name="alert" isActive="false" item-start color="primary"></ion-icon>
+      <h2>You are not participating in any hunt.</h2>
+      <p>Click here to join a new Hunt</p>
+    </ion-item>
 
-    <ion-item-sliding *ngFor="let hunt of hunts" #item>
+    <ion-item-sliding *ngFor="let hunt of activeHunts">
+      <ion-item (click)="more(hunt)">
+        <ion-avatar item-start>
+          <img [src]="hunt.img">
+        </ion-avatar>
+        <h2>{{hunt.name}}</h2>
+        <p>{{hunt.message}}</p>
+        <ion-note item-end>
+          {{hunt.time}}
+        </ion-note>
+      </ion-item>
+
+      <ion-item-options>
+        <button ion-button color="secondary" (click)="more(hunt)">
+          <ion-icon name="menu"></ion-icon>
+          More
+        </button>
+        <button ion-button color="dark" (click)="mute(hunt)">
+          <ion-icon name="volume-off"></ion-icon>
+          Mute
+        </button>
+      </ion-item-options>
+
+      <ion-item-options side="left" (ionSwipe)="archive(hunt)">
+        <button ion-button color="primary" expandable (click)="archive(hunt)">
+          <ion-icon name="trash" class="expand-hide"></ion-icon>
+          Drop
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-list *ngIf="user?.organizer">
+    <ion-list-header>
+      Organized by me
+    </ion-list-header>
+    <ion-item *ngIf="!myHunts || myHunts?.length == 0" (click)="addHunt()">
+      <ion-icon name="alert" isActive="false" item-start color="primary"></ion-icon>
+      <h2>You haven't organized any hunt.</h2>
+      <p>Click here to add a new Hunt</p>
+    </ion-item>
+
+
+    <ion-item-sliding *ngFor="let hunt of myHunts">
+      <ion-item (click)="more(hunt)">
+        <ion-avatar item-start>
+          <img [src]="hunt.img">
+        </ion-avatar>
+        <h2>{{hunt.name}}</h2>
+        <p>{{hunt.message}}</p>
+        <ion-note item-end>
+          {{hunt.time}}
+        </ion-note>
+      </ion-item>
+
+      <ion-item-options>
+        <button ion-button color="secondary" (click)="more(hunt)">
+          <ion-icon name="menu"></ion-icon>
+          More
+        </button>
+        <button ion-button color="dark" (click)="mute(hunt)">
+          <ion-icon name="volume-off"></ion-icon>
+          Mute
+        </button>
+      </ion-item-options>
+
+      <ion-item-options side="left" (ionSwipe)="archive(hunt)">
+        <button ion-button color="primary" expandable (click)="archive(hunt)">
+          <ion-icon name="trash" class="expand-hide"></ion-icon>
+          Drop
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      Completed Hunts
+    </ion-list-header>
+    <ion-item *ngIf="!completedHunts || completedHunts?.length == 0">
+      <ion-icon name="alert" isActive="false" item-start color="primary"></ion-icon>
+      <h2>You haven't completed any hunts.</h2>
+    </ion-item>
+
+    <ion-item-sliding *ngFor="let hunt of completedHunts">
       <ion-item (click)="more(hunt)">
         <ion-avatar item-start>
           <img [src]="hunt.img">

@@ -3,8 +3,12 @@ import { NavController, ModalController } from 'ionic-angular';
 
 import { HuntDetailsPage } from '../hunt-details/hunt-details';
 import { HuntCreatePage } from '../hunt-create/hunt-create';
+import { SearchPage } from '../search/search';
+
+import { SessionData } from '../../providers/session.data';
 
 import { Hunt } from '../../models/hunt';
+import { User } from '../../models/user';
 
 
 @Component({
@@ -12,11 +16,14 @@ import { Hunt } from '../../models/hunt';
   templateUrl: 'my-hunts.html'
 })
 export class MyHuntsPage {
-  hunts: Hunt[];
+  activeHunts: Hunt[];
+  myHunts: Hunt[];
+  completedHunts: Hunt[];
+  user: User;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private sessionData: SessionData) {
 
-    this.hunts = [
+    this.activeHunts = [
       {
         img: 'assets/img/speakers/cmu.jpg',
         name: 'CMU Silicon Valley',
@@ -41,8 +48,23 @@ export class MyHuntsPage {
   ionViewDidLoad() {
   }
 
+  ngAfterViewInit() {
+    this.getUserData();
+  }
+
+  getUserData() {
+     return this.sessionData.getUser().then((user: User) => {
+      this.user = user;
+      return;
+    });
+  }
+
   addHunt(){
     this.navCtrl.push(HuntCreatePage);
+  }
+
+  joinHunt(){
+    this.navCtrl.push(SearchPage);
   }
 
   archive(item: Hunt){
