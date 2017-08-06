@@ -8,6 +8,8 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { SessionData } from '../../providers/session.data';
 import { UserService } from '../../providers/user.service';
 
+import { User } from '../../models/user';
+
 /**
  * The Welcome Page is a splash page that quickly describes the app,
  * and then directs the user to create an account or log in.
@@ -52,7 +54,7 @@ export class WelcomePage {
   testLogin(){
     let loading = this.loadingCtrl.create({content: 'Loading...'});
     
-    let dummyUser: {displayName: 'Test User', email: 'test@cmu.edu', familyName: 'User', givenName: 'Test', idToken: '0', imageUrl: 'http://www.gravatar.com/avatar?d=mm&s=140', userId: 0, organizer: true}
+    let dummyUser: User = {displayName: 'Test User', email: 'test@cmu.edu', familyName: 'User', givenName: 'Test', idToken: '0', imageUrl: 'http://www.gravatar.com/avatar?d=mm&s=140', userId: 0, organizer: true}
     this.userService.loginOrSignUp(dummyUser).subscribe(user => {
       loading.dismiss();
       if(user){
