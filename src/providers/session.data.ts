@@ -37,12 +37,6 @@ export class SessionData {
     });
   }
 
-  setUsername(userObj: User, displayName: string) {
-    // call DB to update too
-    userObj.displayName = displayName;
-    this.storage.set('user', userObj);
-  }
-
   hasLoggedIn() {
     return new Promise(resolve => {
       this.storage.get(this.HAS_LOGGED_IN).then((value: boolean) => resolve(value));
