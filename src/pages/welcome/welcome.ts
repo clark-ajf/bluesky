@@ -30,7 +30,7 @@ export class WelcomePage {
         response.organizer = false;
         this.userService.loginOrSignUp(response).subscribe(user => {
           if(user){
-            this.sessionData.login(user);
+            this.sessionData.login(response);
             this.navCtrl.setRoot(TabsPage);
           }else{            
             console.log('API Login/Signup failed');
