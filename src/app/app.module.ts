@@ -22,6 +22,8 @@ import { TutorialPage } from '../pages/tutorial/tutorial';
 import { WelcomePage } from '../pages/welcome/welcome';
 
 import { SessionData } from '../providers/session.data';
+import { HuntService } from '../providers/hunt.service';
+import { LocationService } from '../providers/location.service';
 
 import { Camera } from '@ionic-native/camera';
 import { GoogleMaps } from '@ionic-native/google-maps';
@@ -102,6 +104,8 @@ export function HttpLoaderFactory(http: Http) {
     Base64ToGallery,
     Printer,
     SessionData,
+    HuntService,
+    LocationService,
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
