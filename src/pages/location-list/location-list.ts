@@ -23,30 +23,6 @@ export class LocationListPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private locationService: LocationService, private huntService: HuntService) {
     this.hunt = <Hunt> navParams.get('hunt');
     this.user = <User> navParams.get('user');
-    this.locations = [
-      {
-        _id: '',
-        qrToken: 'mJ9YLW1pSmOGI98llLPyrlikKxVC803uuB+8uevVADc=',
-        imageUrl: 'assets/img/locations/SV_campus.jpg',
-        name: 'Location 1',
-        description: 'Main building on Campus, with a sign hard to forget!',
-        status: 'not_found',
-        clues: [
-            {message: 'Lorem Ipsum'}
-        ]
-      },
-      {
-        _id: '',
-        qrToken: '12345',
-        imageUrl: 'assets/img/locations/cmu_sv_fence.jpg',
-        name: 'Location 2',
-        description: 'By today the colors should be different, it changes every year!',
-        status: 'found',
-        clues: [
-            {message: 'Lorem Ipsum'}
-        ]
-      }
-    ];
 
     this.locationService.getHuntLocationsByUser(this.user._id, this.hunt._id).subscribe(locations => {
       this.locations = locations;

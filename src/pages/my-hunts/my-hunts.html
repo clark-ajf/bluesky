@@ -40,10 +40,6 @@
           <ion-icon name="menu"></ion-icon>
           More
         </button>
-        <button ion-button color="dark" (click)="mute(hunt)">
-          <ion-icon name="volume-off"></ion-icon>
-          Mute
-        </button>
       </ion-item-options>
 
       <ion-item-options side="left" (ionSwipe)="archive(hunt)">
@@ -66,7 +62,7 @@
 
 
     <ion-item-sliding *ngFor="let hunt of myHunts">
-      <ion-item (click)="more(hunt)">
+      <ion-item (click)="editHunt(hunt)">
         <ion-avatar item-start>
           <img [src]="hunt.imageUrl">
         </ion-avatar>
@@ -75,13 +71,9 @@
       </ion-item>
 
       <ion-item-options>
-        <button ion-button color="secondary" (click)="more(hunt)">
+        <button ion-button color="secondary" (click)="editHunt(hunt)">
           <ion-icon name="menu"></ion-icon>
           More
-        </button>
-        <button ion-button color="dark" (click)="mute(hunt)">
-          <ion-icon name="volume-off"></ion-icon>
-          Mute
         </button>
       </ion-item-options>
 
@@ -116,10 +108,6 @@
         <button ion-button color="secondary" (click)="more(hunt)">
           <ion-icon name="menu"></ion-icon>
           More
-        </button>
-        <button ion-button color="dark" (click)="mute(hunt)">
-          <ion-icon name="volume-off"></ion-icon>
-          Mute
         </button>
       </ion-item-options>
 

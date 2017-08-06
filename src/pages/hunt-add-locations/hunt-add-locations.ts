@@ -24,10 +24,17 @@ export class HuntAddLocationsPage {
   ionViewDidLoad() {}
 
   publishHunt(){
-    this.huntService.saveHunt(this.hunt).subscribe(hunt => {
-      console.log(hunt);
-      this.navCtrl.setRoot(MyHuntsPage);
-    });
+    if(this.hunt._id != ''){
+      this.huntService.updateHunt(this.hunt).subscribe(hunt => {
+        console.log(hunt);
+        this.navCtrl.setRoot(MyHuntsPage);
+      });
+    }else{      
+      this.huntService.saveHunt(this.hunt).subscribe(hunt => {
+        console.log(hunt);
+        this.navCtrl.setRoot(MyHuntsPage);
+      });
+    }
   }
 
   editLocation(location: Location){

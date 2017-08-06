@@ -39,6 +39,26 @@ export class HuntService {
             .catch((error: any) => Observable.throw(error.json().message || 'Server error'));
     }
 
+    updateHunt(hunt: Hunt): Observable<Hunt> {
+        let bodyString = JSON.stringify(hunt);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.patch(this.serviceUrl, bodyString, options)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().message || 'Server error'));
+    }
+
+    deleteHunt(huntId: string): Observable<Hunt> {
+        let bodyString = JSON.stringify({huntId: huntId});
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this.serviceUrl + '/delete' , bodyString, options)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().message || 'Server error'));
+    }
+
     activateHunt(userId: string, huntId: string): Observable<Hunt> {
         let bodyString = JSON.stringify({userId: userId, huntId: huntId, status: 'active'});
         let headers = new Headers({ 'Content-Type': 'application/json' });

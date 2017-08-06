@@ -22,106 +22,7 @@ export class MyHuntsPage {
   completedHunts: Hunt[];
   user: User;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private sessionData: SessionData, private huntService: HuntService) {
-
-    this.activeHunts = [
-      {
-        _id: '',
-        imageUrl: 'assets/img/speakers/cmu.jpg',
-        name: 'CMU Silicon Valley',
-        shortDescription: 'Explore CMU Silicon Valley',
-        longDescription: '',
-        isDeleted: false,
-        owner: { _id: '', displayName: 'Test User', email: 'test@cmu.edu', familyName: 'User', givenName: 'Test', idToken: '0', imageUrl: 'http://www.gravatar.com/avatar?d=mm&s=140', userId: 0, organizer: true },
-        locations: [
-        {
-          _id: '',
-          qrToken: 'mJ9YLW1pSmOGI98llLPyrlikKxVC803uuB+8uevVADc=',
-          imageUrl: 'assets/img/locations/SV_campus.jpg',
-          name: 'Location 1',
-          description: 'Main building on Campus, with a sign hard to forget!',
-          status: 'not_found',
-          clues: [
-              {message: 'Lorem Ipsum'}
-          ]
-        },
-        {          
-          _id: '',
-          qrToken: '12345',
-          imageUrl: 'assets/img/locations/cmu_sv_fence.jpg',
-          name: 'Location 2',
-          description: 'By today the colors should be different, it changes every year!',
-          status: 'found',
-          clues: [
-              {message: 'Lorem Ipsum'}
-          ]
-        }]
-      }, {
-        _id: '',
-        imageUrl: 'assets/img/speakers/car.jpg',
-        name: 'Fake Car Intern Welcome',
-        shortDescription: 'Fake Car Intern Orientation',
-        longDescription: '',
-        isDeleted: false,
-        owner: { _id: '', displayName: 'Test User', email: 'test@cmu.edu', familyName: 'User', givenName: 'Test', idToken: '0', imageUrl: 'http://www.gravatar.com/avatar?d=mm&s=140', userId: 0, organizer: true },
-        locations: [
-        {          
-          _id: '',
-          qrToken: 'mJ9YLW1pSmOGI98llLPyrlikKxVC803uuB+8uevVADc=',
-          imageUrl: 'assets/img/locations/SV_campus.jpg',
-          name: 'Location 1',
-          description: 'Main building on Campus, with a sign hard to forget!',
-          status: 'not_found',
-          clues: [
-              {message: 'Lorem Ipsum'}
-          ]
-        },
-        {          
-          _id: '',
-          qrToken: '12345',
-          imageUrl: 'assets/img/locations/cmu_sv_fence.jpg',
-          name: 'Location 2',
-          description: 'By today the colors should be different, it changes every year!',
-          status: 'found',
-          clues: [
-              {message: 'Lorem Ipsum'}
-          ]
-        }]
-      }, {
-        _id: '',
-        imageUrl: 'assets/img/speakers/mtv.jpg',
-        name: 'Mountain View Mission',
-        shortDescription: 'Discover the coolest sights in Mountain View',
-        longDescription: '',
-        isDeleted: false,
-        owner: { _id: '', displayName: 'Test User', email: 'test@cmu.edu', familyName: 'User', givenName: 'Test', idToken: '0', imageUrl: 'http://www.gravatar.com/avatar?d=mm&s=140', userId: 0, organizer: true },
-        locations: [
-        {          
-          _id: '',
-          qrToken: 'mJ9YLW1pSmOGI98llLPyrlikKxVC803uuB+8uevVADc=',
-          imageUrl: 'assets/img/locations/SV_campus.jpg',
-          name: 'Location 1',
-          description: 'Main building on Campus, with a sign hard to forget!',
-          status: 'not_found',
-          clues: [
-              {message: 'Lorem Ipsum'}
-          ]
-        },
-        {          
-          _id: '',
-          qrToken: '12345',
-          imageUrl: 'assets/img/locations/cmu_sv_fence.jpg',
-          name: 'Location 2',
-          description: 'By today the colors should be different, it changes every year!',
-          status: 'found',
-          clues: [
-              {message: 'Lorem Ipsum'}
-          ]
-        }]
-      }];
-
-    
-  }
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private sessionData: SessionData, private huntService: HuntService) {}
 
   loadData() {
     this.huntService.getHuntsByUser(this.user._id).subscribe(hunts => {
@@ -152,11 +53,17 @@ export class MyHuntsPage {
   }
 
   archive(item: Hunt){
+    this.huntService.deleteHunt(item._id).subscribe(result => {
+      this.completedHunts = this.completedHunts.filter(hunt => hunt !== item);  
+      this.activeHunts = this.activeHunts.filter(hunt => hunt !== item);  
+      this.myHunts = this.myHunts.filter(hunt => hunt !== item);    
+    });
+  }
 
+  editHunt(item: Hunt){
+    this.navCtrl.push(HuntCreatePage, { user: this.user, hunt: item }); 
   }
-  mute(item: Hunt){
-        
-  }
+  
   more(item: Hunt){
     this.navCtrl.push(HuntDetailsPage, { hunt: item, user: this.user });
   }

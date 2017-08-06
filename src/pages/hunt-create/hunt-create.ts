@@ -18,13 +18,17 @@ export class HuntCreatePage {
   private huntForm: FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private formBuilder: FormBuilder) {
-    this.hunt = { _id: '', imageUrl: '', shortDescription: '', name: '', isDeleted: false, owner: <User> navParams.get('user'), longDescription: '', locations: []}
+    if(typeof navParams.get('hunt') !== 'undefined'){
+        this.hunt = <Hunt> navParams.get('hunt');
+    }else{        
+        this.hunt = { _id: '', imageUrl: '', shortDescription: '', name: '', isDeleted: false, owner: <User> navParams.get('user'), longDescription: '', locations: []}
+    }
 
-      this.huntForm = this.formBuilder.group({
-          name: ['', Validators.compose([Validators.required])],
-          short_description: ['', Validators.compose([Validators.required])],
-          long_description: ['', Validators.compose([Validators.required])]
-      });
+    this.huntForm = this.formBuilder.group({
+        name: [this.hunt.name, Validators.compose([Validators.required])],
+        short_description: [this.hunt.shortDescription, Validators.compose([Validators.required])],
+        long_description: [this.hunt.longDescription, Validators.compose([Validators.required])]
+    });
   }
 
   next(){
