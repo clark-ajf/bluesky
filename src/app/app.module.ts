@@ -5,6 +5,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
+import { Configuration } from './app.constants';
 
 import { MyHuntsPage } from '../pages/my-hunts/my-hunts';
 import { HuntCreatePage } from '../pages/hunt-create/hunt-create';
@@ -24,6 +25,7 @@ import { WelcomePage } from '../pages/welcome/welcome';
 import { SessionData } from '../providers/session.data';
 import { HuntService } from '../providers/hunt.service';
 import { LocationService } from '../providers/location.service';
+import { UserService } from '../providers/user.service';
 
 import { Camera } from '@ionic-native/camera';
 import { GoogleMaps } from '@ionic-native/google-maps';
@@ -106,6 +108,8 @@ export function HttpLoaderFactory(http: Http) {
     SessionData,
     HuntService,
     LocationService,
+    UserService,
+    Configuration,
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
