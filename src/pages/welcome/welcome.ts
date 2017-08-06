@@ -34,6 +34,8 @@ export class WelcomePage {
         this.userService.loginOrSignUp(response).subscribe(user => {
           loading.dismiss();
           if (user) {
+            response._id = user._id;
+            response.organizer = user.organizer;
             this.sessionData.login(response);
             this.navCtrl.setRoot(TabsPage);
           } else {
@@ -54,10 +56,12 @@ export class WelcomePage {
   testLogin() {
     let loading = this.loadingCtrl.create({ content: 'Loading...' });
 
-    let dummyUser: User = { displayName: 'Test User', email: 'test@cmu.edu', familyName: 'User', givenName: 'Test', idToken: '0', imageUrl: 'http://www.gravatar.com/avatar?d=mm&s=140', userId: 0, organizer: true }
+    let dummyUser: User = { _id: '', displayName: 'Test User', email: 'test@cmu.edu', familyName: 'User', givenName: 'Test', idToken: '0', imageUrl: 'http://www.gravatar.com/avatar?d=mm&s=140', userId: 0, organizer: true }
     this.userService.loginOrSignUp(dummyUser).subscribe(user => {
       loading.dismiss();
       if (user) {
+        dummyUser._id = user._id;
+        dummyUser.organizer = user.organizer;
         this.sessionData.login(dummyUser);
         this.navCtrl.setRoot(TabsPage);
       } else {
