@@ -125,7 +125,9 @@ export class MyHuntsPage {
 
   loadData() {
     this.huntService.getHuntsByUser(this.user._id).subscribe(hunts => {
-      this.completedHunts = hunts;
+      this.completedHunts = hunts.filter(hunt => {return hunt.status == 'completed'});
+      this.activeHunts = hunts.filter(hunt => {return hunt.status == 'active'});
+      this.myHunts = hunts.filter(hunt => {return hunt.status == 'owned'});
     });
   }
 
@@ -142,7 +144,7 @@ export class MyHuntsPage {
   }
 
   addHunt(){
-    this.navCtrl.push(HuntCreatePage);
+    this.navCtrl.push(HuntCreatePage, { user: this.user });
   }
 
   joinHunt(){
@@ -156,6 +158,6 @@ export class MyHuntsPage {
         
   }
   more(item: Hunt){
-    this.navCtrl.push(HuntDetailsPage, { hunt: item });
+    this.navCtrl.push(HuntDetailsPage, { hunt: item, user: this.user });
   }
 }

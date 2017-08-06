@@ -3,8 +3,8 @@ import { NavController, ModalController, NavParams } from 'ionic-angular';
 
 import { LocationDetailsPage } from '../location-details/location-details';
 
-import { SessionData } from '../../providers/session.data';
 import { LocationService } from '../../providers/location.service';
+import { HuntService } from '../../providers/hunt.service';
 
 import { User } from '../../models/user';
 import { Location } from '../../models/location';
@@ -20,8 +20,9 @@ export class LocationListPage {
   hunt: Hunt;
   locations: Location[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private sessionData: SessionData, private locationService: LocationService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private locationService: LocationService, private huntService: HuntService) {
     this.hunt = <Hunt> navParams.get('hunt');
+    this.user = <User> navParams.get('user');
     this.locations = [
       {
         _id: '',
@@ -44,29 +45,30 @@ export class LocationListPage {
         clues: [
             {message: 'Lorem Ipsum'}
         ]
-      }];
+      }
+    ];
+
+    this.locationService.getHuntLocationsByUser(this.user._id, this.hunt._id).subscribe(locations => {
+      this.locations = locations;
+    }, error => {
+      console.log(error);
+    })
   }
 
-  ionViewDidLoad() {
-  }
-
-  ngAfterViewInit() {
-    this.getUserData();
-  }
-
-  getUserData() {
-     return this.sessionData.getUser().then((user: User) => {
-      this.user = user;
-      this.locationService.getHuntLocationsByUser(this.user._id, this.hunt._id).subscribe(locations => {
-        this.locations = locations;
-      }, error => {
-        console.log(error);
-      })
-      return;
-    });
+  checkCompletion(){
+    if(typeof this.hunt.status !== 'undefined'){
+      if(this.hunt.status != 'complete'){
+        if(this.locations.filter(location => location.status == 'found').length == this.locations.length){
+          this.huntService.completeHunt(this.user._id, this.hunt._id).subscribe(result => {
+            this.hunt.status = 'complete';
+            //congrats!
+          });
+        }
+      }
+    }    
   }
   
   more(item: Location){
-    this.navCtrl.push(LocationDetailsPage, { location: item });
+    this.navCtrl.push(LocationDetailsPage, { location: item, user: this.user });
   }
 }

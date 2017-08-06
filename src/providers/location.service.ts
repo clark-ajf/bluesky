@@ -10,9 +10,11 @@ import { Location } from '../models/location';
 @Injectable()
 export class LocationService {    
     private serviceUrl: string = 'locations'; 
+    private userHuntLocationUrl: string = 'userhuntlocations'; 
 
     constructor(private http: Http, private config: Configuration) { 
         this.serviceUrl = config.ServerWithApiUrl + this.serviceUrl;
+        this.userHuntLocationUrl = config.ServerWithApiUrl + this.userHuntLocationUrl;
     }
 
     getHuntLocationsByUser(userId: string, huntId: string): Observable<Location[]> {
@@ -21,12 +23,12 @@ export class LocationService {
             .catch((error: any) => Observable.throw(error.json().message || 'Server error'));
     }
 
-    saveHunt(userId: string, body: Object): Observable<Location> {
-        let bodyString = JSON.stringify(body);
+    checkIn(userId: string, locationId: string): Observable<Location> {
+        let bodyString = JSON.stringify({userId: userId, locationId: locationId, status: 'found'});
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this.serviceUrl + '/' + userId, bodyString, options)
+        return this.http.post(this.userHuntLocationUrl, bodyString, options)
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().message || 'Server error'));
     }

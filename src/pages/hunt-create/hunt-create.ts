@@ -3,8 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
-import { SessionData } from '../../providers/session.data';
-
 import { HuntAddLocationsPage } from '../hunt-add-locations/hunt-add-locations';
 
 import { Hunt } from '../../models/hunt';
@@ -19,17 +17,14 @@ export class HuntCreatePage {
   private hunt: Hunt;
   private huntForm: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private formBuilder: FormBuilder, private sessionData: SessionData) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private formBuilder: FormBuilder) {
+    this.hunt = { _id: '', imageUrl: '', shortDescription: '', name: '', isDeleted: false, owner: <User> navParams.get('user'), longDescription: '', locations: []}
+
       this.huntForm = this.formBuilder.group({
           name: ['', Validators.compose([Validators.required])],
           short_description: ['', Validators.compose([Validators.required])],
           long_description: ['', Validators.compose([Validators.required])]
       });
-
-      this.getUserData();
-  }
-
-  ionViewDidLoad() {
   }
 
   next(){
@@ -40,13 +35,6 @@ export class HuntCreatePage {
         this.hunt.longDescription = form.long_description;
         this.navCtrl.push(HuntAddLocationsPage, {hunt: this.hunt});
     }
-  }
-
-  getUserData() {
-    return this.sessionData.getUser().then((user: User) => {
-        this.hunt = { _id: '', imageUrl: '', shortDescription: '', name: '', isDeleted: false, owner: user, longDescription: '', locations: []}
-        return;
-    });
   }
 
   deleteImage(){

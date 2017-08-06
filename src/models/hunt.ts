@@ -10,7 +10,8 @@ export class Hunt {
         public locations: Location[],
         public isDeleted: Boolean,
         public imageUrl: string,
-        public owner: User
+        public owner: User,
+        public status?: string
         ){}
 
 }

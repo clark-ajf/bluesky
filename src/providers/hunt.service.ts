@@ -10,9 +10,11 @@ import { Hunt } from '../models/hunt';
 @Injectable()
 export class HuntService {    
     private serviceUrl: string = 'hunts'; 
+    private userHuntUrl: string = 'userhunts';
 
     constructor(private http: Http, private config: Configuration) { 
         this.serviceUrl = config.ServerWithApiUrl + this.serviceUrl;
+        this.userHuntUrl = config.ServerWithApiUrl + this.userHuntUrl;
     }
 
     getHunts(): Observable<Hunt[]> {
@@ -33,6 +35,26 @@ export class HuntService {
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(this.serviceUrl, bodyString, options)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().message || 'Server error'));
+    }
+
+    activateHunt(userId: string, huntId: string): Observable<Hunt> {
+        let bodyString = JSON.stringify({userId: userId, huntId: huntId, status: 'active'});
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this.userHuntUrl, bodyString, options)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().message || 'Server error'));
+    }
+
+    completeHunt(userId: string, huntId: string): Observable<Hunt> {
+        let bodyString = JSON.stringify({userId: userId, huntId: huntId, status: 'complete'});
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this.userHuntUrl, bodyString, options)
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().message || 'Server error'));
     }

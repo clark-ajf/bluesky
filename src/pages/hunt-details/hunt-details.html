@@ -22,6 +22,7 @@
         </ion-card-content>
     </ion-card>
     <div text-center>
-        <button ion-button round large (click)="start()">{{ 'Start' | translate }}</button>
+        <button *ngIf="hunt.status" ion-button round large (click)="continue()" color="secondary">{{ 'Continue' | translate }}</button>
+        <button *ngIf="!hunt.status" ion-button round large (click)="start()">{{ 'Start' | translate }}</button>
     </div>
 </ion-content>
