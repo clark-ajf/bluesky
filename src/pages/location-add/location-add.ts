@@ -22,7 +22,7 @@ export class LocationAddPage {
   private locationForm: FormGroup;
 
   constructor(navParams: NavParams, public viewCtrl: ViewController, private camera: Camera, private formBuilder: FormBuilder, private toastCtrl: ToastController, private modal: ModalController) {
-      this.location = { _id: '', description: '', clues: [], name: '', imageUrl: '', qrToken: CryptoJS.HmacSHA256(new Date().getTime(), "bluesky").toString(CryptoJS.enc.Base64), status: ''}
+      this.location = { _id: '', description: '', clues: [], name: '', imageUrl: '', qrToken: CryptoJS.HmacSHA256(Date.now(), "bluesky").toString(CryptoJS.enc.Base64), status: ''}
 
       if(typeof navParams.get('location') !== 'undefined'){
         this.location = <Location> navParams.get('location');
