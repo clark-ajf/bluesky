@@ -24,6 +24,7 @@
     </ion-item>
   </ion-list>
   <div text-center>
-        <button ion-button round large [disabled]="hunt?.locations.length == 0" (click)="publishHunt()">{{ 'Publish Hunt' | translate }}</button>
+        <button *ngIf="hunt?._id == ''" ion-button round large [disabled]="hunt?.locations.length == 0" (click)="publishHunt()">{{ 'Publish Hunt' | translate }}</button>
+        <button *ngIf="hunt?._id != ''" ion-button round large [disabled]="hunt?.locations.length == 0" (click)="publishHunt()">{{ 'Update Hunt' | translate }}</button>
   </div>
 </ion-content>

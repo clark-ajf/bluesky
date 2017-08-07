@@ -25,10 +25,14 @@ export class MyHuntsPage {
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, private sessionData: SessionData, private huntService: HuntService) {}
 
   loadData() {
-    this.huntService.getHuntsByUser(this.user._id).subscribe(hunts => {
-      this.completedHunts = hunts.filter(hunt => {return hunt.status == 'completed'});
-      this.activeHunts = hunts.filter(hunt => {return hunt.status == 'active'});
-      this.myHunts = hunts.filter(hunt => {return hunt.status == 'owned'});
+    this.huntService.getHuntsByUserAndStatus(this.user._id, 'active').subscribe(hunts => {
+      this.activeHunts = hunts;
+    });
+    this.huntService.getHuntsByUserAndStatus(this.user._id, 'owned').subscribe(hunts => {
+      this.myHunts = hunts;
+    });
+    this.huntService.getHuntsByUserAndStatus(this.user._id, 'complete').subscribe(hunts => {
+      this.completedHunts = hunts;
     });
   }
 

@@ -23,8 +23,8 @@ export class HuntService {
             .catch((error: any) => Observable.throw(error.json().message || 'Server error'));
     }
 
-    getHuntsByUser(userId: string): Observable<Hunt[]> {
-        return this.http.get(this.serviceUrl + '/' + userId)
+    getHuntsByUserAndStatus(userId: string, status: string): Observable<Hunt[]> {
+        return this.http.get(this.serviceUrl + '/' + userId + '/' + status)
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().message || 'Server error'));
     }
