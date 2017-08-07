@@ -44,6 +44,9 @@ export class LocationAddPage {
         this.location.name = form.name;
         this.location.description = form.short_description;
 
+        if(this.location._id == ''){
+          delete this.location._id;
+        }
         this.viewCtrl.dismiss(this.location);
     }
   }

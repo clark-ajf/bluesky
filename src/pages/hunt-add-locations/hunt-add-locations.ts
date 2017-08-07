@@ -29,7 +29,7 @@ export class HuntAddLocationsPage {
         console.log(hunt);
         this.navCtrl.setRoot(MyHuntsPage);
       });
-    }else{      
+    }else{
       this.huntService.saveHunt(this.hunt).subscribe(hunt => {
         console.log(hunt);
         this.navCtrl.setRoot(MyHuntsPage);
@@ -41,7 +41,8 @@ export class HuntAddLocationsPage {
     let modal = this.modal.create(LocationAddPage, {location: location});
     modal.onDidDismiss(data => {
       if(data){
-        this.hunt.locations.push(data);
+        let index = this.hunt.locations.indexOf(location);
+        this.hunt.locations.splice(index, 1, data);
       }
     });
     modal.present();
