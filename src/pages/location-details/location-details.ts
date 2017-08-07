@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, ModalController, NavParams, ToastController, Events } from 'ionic-angular';
 
 import { BarcodeScanner ,BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 
@@ -18,7 +18,7 @@ export class LocationDetailsPage {
   user: User;
   options :BarcodeScannerOptions;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, private barcodeScanner: BarcodeScanner, public toastCtrl: ToastController, private locationService: LocationService) {
+  constructor(public navCtrl: NavController, public events: Events, public modalCtrl: ModalController, public navParams: NavParams, private barcodeScanner: BarcodeScanner, public toastCtrl: ToastController, private locationService: LocationService) {
     this.location = <Location> navParams.get('location');
     this.user = <User> navParams.get('user');
   }
@@ -40,6 +40,7 @@ export class LocationDetailsPage {
                     });
                     toast.present();
                     this.location.status = 'found';
+                    this.events.publish('location:found');
                     this.navCtrl.pop();
                 });
             }else{

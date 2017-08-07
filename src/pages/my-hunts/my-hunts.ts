@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, Events } from 'ionic-angular';
 
 import { HuntDetailsPage } from '../hunt-details/hunt-details';
 import { HuntCreatePage } from '../hunt-create/hunt-create';
@@ -22,7 +22,11 @@ export class MyHuntsPage {
   completedHunts: Hunt[];
   user: User;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private sessionData: SessionData, private huntService: HuntService) {}
+  constructor(public navCtrl: NavController, public events: Events, public modalCtrl: ModalController, private sessionData: SessionData, private huntService: HuntService) {
+    this.events.subscribe('hunts:reload', () => {
+      this.loadData();
+    });
+  }
 
   loadData() {
     this.huntService.getHuntsByUserAndStatus(this.user._id, 'active').subscribe(hunts => {
