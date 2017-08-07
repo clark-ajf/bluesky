@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, NavParams } from 'ionic-angular';
+import { NavController, ModalController, NavParams, ToastController } from 'ionic-angular';
 
 import { LocationDetailsPage } from '../location-details/location-details';
 
@@ -20,7 +20,7 @@ export class LocationListPage {
   hunt: Hunt;
   locations: Location[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private locationService: LocationService, private huntService: HuntService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private locationService: LocationService, private huntService: HuntService, private toastCtrl: ToastController) {
     this.hunt = <Hunt> navParams.get('hunt');
     this.user = <User> navParams.get('user');
 
@@ -37,7 +37,12 @@ export class LocationListPage {
         if(this.locations.filter(location => location.status == 'found').length == this.locations.length){
           this.huntService.completeHunt(this.user._id, this.hunt._id).subscribe(result => {
             this.hunt.status = 'complete';
-            //congrats!
+            const toast = this.toastCtrl.create({
+                message: 'Congratulation You Completed the Hunt!',
+                showCloseButton: true,
+                closeButtonText: 'Ok'
+            });
+            toast.present();
           });
         }
       }
