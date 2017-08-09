@@ -27,6 +27,9 @@ export class LocationDetailsPage {
   }
 
     scan(){
+        if(this.location.status == 'found'){
+            return;
+        }
         this.options = {
             prompt : "Scan QR Code "
         }

@@ -6,7 +6,7 @@
 * Android SDK (Android Studio) for Android deployment
 * XCode for iOS deployment
 
-**Android SDK and XCode configurations could be found in [Ionic Documentation](https://ionicframework.com/docs/intro/deploying/)**
+*Android SDK and XCode configurations could be found in [Ionic Documentation](https://ionicframework.com/docs/intro/deploying/)*
 
 **Setting up your local environment:**
 
@@ -25,10 +25,13 @@ ionic serve --lab
 To deploy the app in your device run:
 ```bash
 #Android
-ionic cordova run android --device
+ionic cordova run android --prod --device
 #iOS
-ionic cordova run ios --device
+ionic cordova run ios --prod --device
 ```
+*(Remove --prod flag to be able to debug the app)*
+
+**Certificate for Google Plus Authentication**
 
 For Android, update the file under platforms/android: project.properties by adding the following lines:
 
