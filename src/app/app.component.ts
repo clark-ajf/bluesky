@@ -33,9 +33,9 @@ export class MyApp {
   ]
 
   loggedInPages: MenuItem[] = [
-    { title: 'My Hunts', component: MyHuntsPage, icon: 'locate', notifications: 3 },
-    { title: 'Search', component: SearchPage, icon: 'search' },
-    { title: 'Account', component: AccountPage, icon: 'person' },
+    { title: 'My Hunts', component: TabsPage, index: 0, icon: 'locate', notifications: 3 },
+    { title: 'Search', component: TabsPage, index: 1, icon: 'search' },
+    { title: 'Account', component: TabsPage, index: 2, icon: 'person' },
     { title: 'Logout', component: WelcomePage, icon: 'log-out', logsOut: true }
   ];
 
