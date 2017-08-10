@@ -74,7 +74,8 @@ export class WelcomePage {
     const toast = this.toastCtrl.create({
       message: message,
       showCloseButton: true,
-      closeButtonText: 'Ok'
+      closeButtonText: 'Ok',
+      duration: 3000
     });
     toast.present();
   }

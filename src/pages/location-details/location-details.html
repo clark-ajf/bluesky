@@ -8,7 +8,7 @@
 
 <ion-content>
     <ion-card>
-        <img [src]="location.imageUrl"/>
+        <ion-img id="imgHolder" width="100%" height="250px" style="overflow-y: scroll;" [src]="location.imageUrl"></ion-img>
         <ion-card-content>
             <ion-card-title>
             {{location.name}}
@@ -18,7 +18,7 @@
             </p>
         </ion-card-content>
     </ion-card>
-    <ion-list>
+    <ion-list *ngIf="location.clues.length > 0">
         <ion-list-header>
         Clues
         </ion-list-header>

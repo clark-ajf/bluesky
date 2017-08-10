@@ -41,7 +41,8 @@ export class LocationQRCodePage {
             const toast = this.toastCtrl.create({
                 message: 'QR Code Saved Successfully in your Gallery',
                 showCloseButton: true,
-                closeButtonText: 'Ok'
+                closeButtonText: 'Ok',
+                duration: 3000
             });
             toast.present();
         },

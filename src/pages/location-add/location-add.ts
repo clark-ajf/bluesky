@@ -55,7 +55,8 @@ export class LocationAddPage {
       const toast = this.toastCtrl.create({
           message: clue.message,
           showCloseButton: true,
-          closeButtonText: 'Ok'
+          closeButtonText: 'Ok',
+          duration: 3000
       });
       toast.present();
   }
@@ -77,7 +78,7 @@ export class LocationAddPage {
 
   selectPicture(takePicture: boolean){
     const options: CameraOptions = {
-        quality: 40,
+        quality: 60,
         destinationType: this.camera.DestinationType.DATA_URL,
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE,

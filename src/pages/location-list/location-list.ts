@@ -46,7 +46,8 @@ export class LocationListPage {
             const toast = this.toastCtrl.create({
                 message: 'Congratulation You Completed the Hunt!',
                 showCloseButton: true,
-                closeButtonText: 'Ok'
+                closeButtonText: 'Ok',
+                duration: 3000
             });
             toast.present();
           });

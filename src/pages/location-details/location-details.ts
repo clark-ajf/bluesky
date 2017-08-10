@@ -39,7 +39,8 @@ export class LocationDetailsPage {
                     const toast = this.toastCtrl.create({
                         message: 'Congratulation You Found the secret!',
                         showCloseButton: true,
-                        closeButtonText: 'Ok'
+                        closeButtonText: 'Ok',
+                        duration: 3000
                     });
                     toast.present();
                     this.location.status = 'found';
@@ -50,7 +51,8 @@ export class LocationDetailsPage {
                 const toast = this.toastCtrl.create({
                     message: 'Ops! That QR Code is not the one you are looking for!',
                     showCloseButton: true,
-                    closeButtonText: 'Ok'
+                    closeButtonText: 'Ok',
+                    duration: 3000
                 });
                 toast.present();
             }
@@ -59,7 +61,8 @@ export class LocationDetailsPage {
             const toast = this.toastCtrl.create({
                 message: 'Invalid QR code',
                 showCloseButton: true,
-                closeButtonText: 'Ok'
+                closeButtonText: 'Ok',
+                duration: 3000
             });
             toast.present();
         });   
@@ -69,7 +72,8 @@ export class LocationDetailsPage {
         const toast = this.toastCtrl.create({
             message: clue.message,
             showCloseButton: true,
-            closeButtonText: 'Ok'
+            closeButtonText: 'Ok',
+            duration: 3000
         });
         toast.present();
     }
