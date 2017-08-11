@@ -13,8 +13,8 @@ export class LocationService {
     private userHuntLocationUrl: string = 'userhuntlocations'; 
 
     constructor(private http: Http, private config: Configuration) { 
-        this.serviceUrl = config.ServerWithApiUrl + this.serviceUrl;
-        this.userHuntLocationUrl = config.ServerWithApiUrl + this.userHuntLocationUrl;
+        this.serviceUrl = this.config.ServerWithApiUrl + this.serviceUrl;
+        this.userHuntLocationUrl = this.config.ServerWithApiUrl + this.userHuntLocationUrl;
     }
 
     getHuntLocationsByUser(userId: string, huntId: string): Observable<Location[]> {

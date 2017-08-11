@@ -13,8 +13,8 @@ export class HuntService {
     private userHuntUrl: string = 'userhunts';
 
     constructor(private http: Http, private config: Configuration) { 
-        this.serviceUrl = config.ServerWithApiUrl + this.serviceUrl;
-        this.userHuntUrl = config.ServerWithApiUrl + this.userHuntUrl;
+        this.serviceUrl = this.config.ServerWithApiUrl + this.serviceUrl;
+        this.userHuntUrl = this.config.ServerWithApiUrl + this.userHuntUrl;
     }
 
     getHunts(): Observable<Hunt[]> {

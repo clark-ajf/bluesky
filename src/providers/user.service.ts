@@ -12,7 +12,7 @@ export class UserService {
     private serviceUrl: string = 'users'; 
 
     constructor(private http: Http, private config: Configuration) { 
-        this.serviceUrl = config.ServerWithApiUrl + this.serviceUrl;
+        this.serviceUrl = this.config.ServerWithApiUrl + this.serviceUrl;
     }
 
     loginOrSignUp(body: Object): Observable<User> {

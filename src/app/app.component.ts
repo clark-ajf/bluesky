@@ -4,9 +4,6 @@ import { Platform, Nav, Config, Events, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { MyHuntsPage } from '../pages/my-hunts/my-hunts';
-import { AccountPage } from '../pages/account/account';
-import { SearchPage } from '../pages/search/search';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { WelcomePage } from '../pages/welcome/welcome';

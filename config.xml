@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="bluesky.thundercloud.icc" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>BlueSkye</name>
+    <name>Seeker</name>
     <description>Scavenger Hunt App.</description>
     <author email="cjeria@cmu.edu" href="http://thundercloud.com/">ThunderCloud Team</author>
     <content src="index.html" />
