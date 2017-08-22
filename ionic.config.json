@@ -1,5 +1,8 @@
 {
   "name": "BlueSky",
   "app_id": "577a8d6f",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }
